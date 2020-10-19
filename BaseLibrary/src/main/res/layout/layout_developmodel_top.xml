@@ -1,0 +1,39 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/layout_top"
+    android:layout_width="match_parent"
+    android:layout_height="50dp"
+    android:background="@color/colorPrimaryDark">
+
+    <ImageView
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_developmodel_arrow_back"
+        android:paddingRight="12dp"
+        android:paddingLeft="12dp"
+        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:id="@+id/layout_back"
+        />
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:textColor="#ffffff"
+        android:textSize="17sp"
+        android:text="标题" />
+
+    <TextView
+        android:id="@+id/tv_right_operate"
+        android:visibility="gone"
+        android:paddingRight="12dp"
+        android:gravity="center"
+        android:textColor="#ffffff"
+        android:textSize="14sp"
+        android:layout_alignParentRight="true"
+        android:layout_centerVertical="true"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
+        android:text="发送此日志"
+         />
+</RelativeLayout>

@@ -4,34 +4,371 @@ apply plugin: 'kotlin-android-extensions'
 apply plugin:'com.github.dcendents.android-maven'
 group="com.github.liyun1030"
 android {
-    compileSdkVersion 30
-    buildToolsVersion "30.0.2"
-
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
     defaultConfig {
-        minSdkVersion 16
-        targetSdkVersion 30
-        versionCode 1
-        versionName "1.0"
-
+        minSdkVersion rootProject.ext.libMinSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode VERSION_CODE as int
+        versionName VERSION_NAME
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         consumerProguardFiles "consumer-rules.pro"
-    }
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
+            }
+        }
+        sourceSets.main.jniLibs.srcDirs = ['libs']
+        ndk {
+            //设置支持的SO库架构
+            abiFilters "armeabi-v7a", "armeabi"
+        }
 
+    }
+    lintOptions {
+        abortOnError false
+    }
     buildTypes {
+        dev {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
         release {
             minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
+    repositories {
+        flatDir {
+            dirs 'libs'//加载libs
+        }
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+            assets.srcDirs = ['src/main/assets', 'src/main/assets/']
+        }
+    }
+    configurations.all {
+        resolutionStrategy.eachDependency { DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == 'com.android.support') {
+                if (!requested.name.startsWith("multidex")) {
+//                    details.useVersion '25.3.1'
+                }
+            }
+        }
+        resolutionStrategy {
+            force "com.android.support:support-v4:27.1.1"
+        }
+    }
+
 }
+
+dependencies {
+//    testImplementation 'junit:junit:4.12'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}
+
 
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
     implementation 'androidx.core:core-ktx:1.3.2'
     implementation 'androidx.appcompat:appcompat:1.2.0'
+    api fileTree(include: ['*.jar'], dir: 'libs')
+    api 'com.android.support:design:28.0.0'
+    api 'com.android.support:multidex:1.0.3'
+    api 'com.android.support.constraint:constraint-layout:1.1.3'
 //    testImplementation 'junit:junit:4.12'
-//    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
-//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+//    androidTestImplementation 'com.android.support.test:runner:1.0.2'
+//    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.2', {
+//        exclude group: 'com.android.support', module: 'support-annotations'
+//    })
 
+    //圆角图片组件
+
+    //    api 'com.makeramen:roundedimageview:2.3.0'
+    api 'com.github.bumptech.glide:glide:3.8.0'
+
+    //注解器
+    api 'com.jakewharton:butterknife:8.8.1'
+    annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
+
+    //友盟
+    api 'com.umeng.umsdk:analytics:7.5.4'
+    api 'com.umeng.umsdk:common:1.5.4'
+
+    //运行时权限
+    api 'pub.devrel:easypermissions:2.0.0'
+
+    //可修改选中项字体大小和指示器长度的TabLayout
+
+    //xrecyclerview下拉刷新列表
+    api 'com.jcodecraeer:xrecyclerview:1.5.9'
+
+    //下拉刷新框架-SwipeToLoadLayout
+
+    //    api 'com.github.Aspsine:SwipeToLoadLayout:1.0.4'
+
+    //xlistview左右滑动出现删除等自定义菜单
+
+    //    api 'com.yanzhenjie:recyclerview-swipe:1.2.0'
+
+    //自定义相册
+
+    //    api 'cn.finalteam:galleryfinal:1.4.8.7'
+
+    //各种统计图
+
+    //    api 'com.github.PhilJay:MPAndroidChart:v3.1.0-alpha'
+
+    //联动-年月日时分秒
+
+    //    api 'com.contrarywind:wheelview:4.0.8'
+
+    //时间选择器或选项选择器
+
+    //    api 'com.contrarywind:Android-PickerView:3.2.7'
+
+    //计数器-倒计时
+
+    //    api 'com.github.iwgang:countdownview:2.1.6'
+
+    //    //Android流式布局，支持单选、多选等，适合用于产品标签等
+
+    //    api 'com.hyman:flowlayout-lib:1.1.2'
+
+    //标签布局
+    compile 'com.github.alidili:FlowLayout:v1.5'
+
+    //简书效果，滑到顶部，top部出来
+
+    //    api 'com.github.cpoopc:scrollablelayoutlib:1.0.1'
+
+    //引导界面或者banner部分
+    api 'cn.bingoogolapple:bga-banner:2.2.5@aar'
+
+    //评分控件
+
+    //    api 'com.github.ornolfr:rating-view:0.1.2@aar'
+
+    //图片裁剪工具
+
+    //    api('com.kevin:crop:1.0.2') {
+
+    //        //排除com.kevin:crop:1.0.2中的v7包，使用项目app中引入的v7
+
+    //        exclude group: 'com.android.support', module: 'appcompat-v7'
+
+    //    }
+
+    //小而精致的轮播器
+
+    //    api 'com.hejunlin.superindicatorlibray:superindicatorlibray:1.0.3'
+
+    //仿ios-按钮二选一
+
+    //    api 'info.hoang8f:android-segmented:1.0.6'
+
+    //arouter
+
+    //    api ('com.alibaba:arouter-api:1.3.1'){ exclude group: 'com.android.support' }
+
+    //    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
+
+    // 安卓选择器类库，包括日期选择器、时间选择器、单项选择器、双项选择器、
+
+    // 城市地址选择器、车牌号选择器、数字选择器、星座选择器、生肖选择器、
+
+    // 颜色选择器、文件选择器、目录选择器等，可自定义顶部及底部界面，
+
+    // 可自定义窗口动画……https://github.com/gzu-liyujiang/AndroidPicker
+
+    //    api(name: 'wheelpicker', ext: 'aar')
+
+    //Android 图片选择、预览、九宫格图片控件、拖拽排序九宫格图片控件
+
+    // -------------------- 以下4个库是必须依赖的 ----------------------------
+    api 'cn.bingoogolapple:bga-photopicker:1.0.6@aar'
+    api 'cn.bingoogolapple:bga-banner:2.2.5@aar'
+    api 'cn.bingoogolapple:bga-baseadapter:1.2.7@aar'
+
+    // -------------------- 以上4个库是必须依赖的 ----------------------------
+
+    // 目前支持常见的 4 种图片加载库，必须在下面四个图片加载库中选择一个添加依赖
+
+    //    api 'com.squareup.picasso:picasso:2.5.2'
+
+    //implementation 'com.nostra13.universalimageloader:universal-image-loader:1.9.5'
+
+    //implementation 'org.xutils:xutils:3.5.0'
+
+    //flexboxLayout代替linearlayout
+
+    //    api 'com.google.android:flexbox:0.3.2'
+
+    //facebook 弹簧效果库
+
+    //    api 'com.facebook.rebound:rebound:0.3.8'
+
+    //viewPager切换动画效果
+
+    //    api 'com.zhy:magic-viewpager:1.0.1'
+
+    //alibaba-fastjson库
+    api 'com.alibaba:fastjson:1.2.54'
+    api 'com.readystatesoftware.chuck:library:1.0.4'
+
+    //google gson
+    api 'com.google.code.gson:gson:2.8.0'
+
+    //时间日期选择控件 https://github.com/mrfluency/Time-Selector
+
+    //    api 'com.feezu.liuli:timeselector:1.1.3+'
+
+    //类似微博的@某人的EdiText https://github.com/CarGuo/RickText
+
+    //支持类似微博的文本效果，表情、@某人、话题、url链接等。DEMO同时演示了MVVM模式的使用。
+
+    //    api 'com.github.CarGuo:RickText:v1.0.5'
+
+    //base64-编解码
+    api files('libs/sun.misc.BASE64Decoder.jar')
+
+    //recyclerview的万能适配器
+
+    //    api 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.25'
+
+    //textview数字圆角标签
+
+    //    api 'q.rorbin:badgeview:1.1.3'
+
+    //ormlite-数据库
+
+    //    api 'com.j256.ormlite:ormlite-android:5.0'
+
+    //    api 'com.j256.ormlite:ormlite-core:5.0'
+
+    //可固定边界内容字体大小自适应的 TextView
+
+    //    api 'me.grantland:autofittextview:0.2.+'
+
+    //tablayout-选项球
+
+    //    api 'com.flyco.tablayout:FlycoTabLayout_Lib:2.0.8@aar'
+
+    //图片缩放
+
+    //    api 'com.commit451:PhotoView:1.2.4'-implementation 'com.github.chrisbanes:PhotoView:1.2.4'
+
+    //开源日志框架
+
+    //    api 'com.orhanobut:logger:2.1.1'
+
+    //swipelayout-左右滑
+
+    //    api 'com.daimajia.swipelayout:library:1.1.7@aar'
+
+    //switchbutton-toggle开关
+
+    //    api 'com.kyleduo.switchbutton:library:2.0.0'
+
+    //必须使用
+    api 'com.lzy.net:okgo:3.0.4'
+
+    //以下三个选择添加，okrx和okrx2不能同时使用
+
+    //    api 'com.lzy.net:okrx2:2.0.2'--上传和下载
+    api 'com.lzy.net:okserver:2.0.5'
+
+    //辅助沉浸式
+    api 'com.lzy.widget:imagepicker:0.3.2'
+
+    //好看的对话框
+
+    //    api 'com.github.f0ris.sweetalert:library:1.5.1'
+
+    //    compile 'com.squareup.retrofit2:converter-gson:2.0.0-beta4'
+
+    //    compile 'com.squareup.retrofit2:adapter-rxjava:2.0.0-beta4'
+
+    //具有共同头部的 ViewPager，支持与ListView，GridView，ScrollView，WebView，RecyclerView 嵌套使用。
+
+    // 具有连续的滑动事件 和 滑动监听， 支持下拉刷新
+
+    //    api 'com.lzy.widget:ninegridview:0.2.1'
+
+    //    api 'com.lzy.widget:imagepicker:0.3.2'
+
+    //    api 'com.lzy.widget:view-core:0.2.1'
+
+    //rxjava2-rxandroid2-retrofit2-okhttp3
+
+    //导入RxJava 和 RxAndroid
+    api 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    api 'io.reactivex.rxjava2:rxjava:2.0.7'
+
+    //        compile 'com.google.code.gson:gson:2.6.2'
+
+    //导入retrofit
+    api 'com.squareup.retrofit2:retrofit:2.3.0'
+    api 'com.squareup.retrofit2:converter-gson:2.3.0'
+
+    //转换器，请求结果转换成Model
+    api 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+
+    //添加HttpLoggingInterceptor进行调试
+    api 'com.squareup.okhttp3:logging-interceptor:3.8.1'
+
+    //中文转拼音
+
+    //    api 'com.belerweb:pinyin4j:2.5.0'
+
+    //魔窗sdk-从网页打开app:
+
+    //    api 'cn.magicwindow:MagicWindowSDK:4.1'
+    api 'me.drakeet.multitype:multitype:2.2.1'
+    api('com.hwangjr.rxbus:rxbus:2.0.0') {
+        exclude group: 'com.android.support'
+    }
+
+    //状态栏沉浸式
+    implementation 'com.gyf.barlibrary:barlibrary:2.3.0'
+
+    //权限申请
+
+    //    api 'me.weyye.hipermission:library:1.0.7'
+    implementation files('libs/open_sdk_r5509.jar')
+    implementation files('libs/mta-sdk-1.6.2.jar')
+    implementation files('libs/weibosdkcore_release.jar')
+
+    // 添加下面的内容
+
+    //折线图，曲线图
+
+    //    implementation 'com.github.lecho:hellocharts-library:1.5.8@aar'
+
+    //    implementation 'com.diogobernardino:williamchart:2.5.0'
+
+    //可修改选中项字体大小和指示器长度的TabLayout
+
+    //    api 'com.androidkun:XTabLayout:1.1.3'
+
+    //图片选择
+    api 'cn.finalteam:galleryfinal:1.4.8.7'
+    api 'com.android.support:support-v4:23.1.1'
+    implementation files('libs/core-3.0.0.jar')
+
+    //侧滑返回
+    api 'me.imid.swipebacklayout.lib:library:1.3.0'
+
+    implementation 'com.youth.banner:banner:1.4.10'
+    compile 'com.tencent.mm.opensdk:wechat-sdk-android-with-mta:+'
 }

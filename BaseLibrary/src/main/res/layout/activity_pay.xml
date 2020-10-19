@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/title_height"
+        android:background="@color/white">
+
+        <ImageView
+            android:id="@+id/ib_back"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_centerVertical="true"
+            android:padding="10dp"
+            android:src="@mipmap/ic_back_dark" />
+
+        <TextView
+            android:id="@+id/tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="40dp"
+            android:layout_marginRight="40dp"
+            android:lines="1"
+            android:text="111111"
+            android:singleLine="true"
+            android:textColor="@color/gray1"
+            android:textSize="15sp" />
+
+        <View
+            android:id="@+id/divider"
+            style="@style/Divider"
+            android:layout_alignParentBottom="true" />
+    </RelativeLayout>
+
+    <TextView
+        android:id="@+id/pay_alert_tv"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:background="#fff2df"
+        android:gravity="left|center_vertical"
+        android:includeFontPadding="false"
+        android:lines="1"
+        android:paddingLeft="10dp"
+        android:text="@string/pay_alert"
+        android:textColor="#897658"
+        android:textSize="12sp" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="5dp"
+        android:background="#f8f8f8"></View>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:id="@+id/ali_pay_layout"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="#ffffff"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:drawableLeft="@mipmap/pay_ali"
+                android:drawablePadding="18dp"
+                android:gravity="center"
+                android:text="@string/pay_with_ali"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"></View>
+
+            <CheckBox
+                android:id="@+id/ali_pay_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="35dp"
+                android:button="@drawable/pay_selector"
+                android:checked="true"
+                android:clickable="false"
+                android:focusable="false"
+                android:gravity="center" />
+        </LinearLayout>
+
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1px"
+            android:layout_marginLeft="20dp"
+            android:layout_marginRight="20dp"
+            android:background="#eeeeee"></View>
+
+        <LinearLayout
+            android:id="@+id/wx_pay_layout"
+            android:layout_width="match_parent"
+            android:layout_height="90dp"
+            android:background="#ffffff"
+            android:gravity="center_vertical">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:drawableLeft="@mipmap/pay_wx"
+                android:drawablePadding="18dp"
+                android:gravity="center"
+                android:text="@string/pay_with_weixin"
+                android:textColor="#333333"
+                android:textSize="14sp" />
+
+            <View
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_weight="1"></View>
+
+            <CheckBox
+                android:id="@+id/wx_pay_rb"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginRight="35dp"
+                android:button="@drawable/pay_selector"
+                android:clickable="false"
+                android:focusable="false"
+                android:gravity="center" />
+        </LinearLayout>
+    </LinearLayout>
+
+    <View
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_weight="1"></View>
+
+    <Button
+        android:id="@+id/pay_btn"
+        android:layout_width="match_parent"
+        android:layout_height="40dp"
+        android:layout_marginLeft="12dp"
+        android:layout_marginRight="12dp"
+        android:layout_marginBottom="25dp"
+        android:background="@drawable/bg_corner_solid"
+        android:gravity="center"
+        android:padding="0dp"
+        android:text="@string/pay_result"
+        android:textColor="#ffffff"
+        android:textSize="14sp" />
+</LinearLayout>
