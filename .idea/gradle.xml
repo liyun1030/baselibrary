@@ -12,6 +12,8 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/BaseLibrary" />
+            <option value="$PROJECT_DIR$/BaseLibraryProject" />
+            <option value="$PROJECT_DIR$/alipaySdk" />
             <option value="$PROJECT_DIR$/app" />
           </set>
         </option>

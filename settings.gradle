@@ -1,2 +1,2 @@
-include ':BaseLibrary',':app'
+include ':BaseLibrary',':app',':alipaySdk',
 rootProject.name = "BaseLibraryProject"
