@@ -1,3 +1,2 @@
-include ':BaseLibrary'
-include ':app'
+include ':BaseLibrary',':app'
 rootProject.name = "BaseLibraryProject"
