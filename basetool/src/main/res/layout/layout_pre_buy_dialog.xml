@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/round_corner_white_no_stroke_shape"
+    android:orientation="vertical"
+    android:paddingBottom="11dp">
+
+    <TextView
+        android:id="@+id/tv_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="12dp"
+        android:text="@string/pre_buy_tips"
+        android:textColor="@color/gray1"
+        android:textSize="@dimen/font_normal_large" />
+
+    <TextView
+        android:id="@+id/tv_last_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="17dp"
+        android:text="@string/last_score_tips"
+        android:textColor="@color/gray3"
+        android:textSize="@dimen/font_normal_small" />
+
+    <TextView
+        android:id="@+id/tv_pay_score"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/pay_score_tips"
+        android:textColor="@color/gray3"
+        android:textSize="@dimen/font_normal_small" />
+
+    <TextView
+        android:id="@+id/tv_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="15dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginTop="10dp"
+        android:text="@string/pre_buy_info"
+        android:textColor="@color/gray3"
+        android:textSize="@dimen/font_normal_small" />
+
+    <LinearLayout
+        android:id="@+id/ll_cancel_confirm"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginLeft="13dp"
+        android:layout_marginRight="13dp"
+        android:layout_marginTop="10dp"
+        android:orientation="horizontal">
+
+        <Button
+            android:id="@+id/btn_cancel"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginEnd="11dp"
+            android:layout_marginRight="11dp"
+            android:layout_weight="1.0"
+            android:background="@drawable/round_corner_white_shape"
+            android:text="@string/cancel"
+            android:textColor="@color/gray3"
+            android:textSize="@dimen/font_normal_large" />
+
+        <Button
+            android:id="@+id/btn_buy_now"
+            style="?android:attr/buttonBarButtonStyle"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_weight="1.0"
+            android:background="@drawable/round_corner_green_shape"
+            android:text="@string/buy_instance"
+            android:textColor="@color/white"
+            android:textSize="@dimen/font_normal_large" />
+    </LinearLayout>
+
+</LinearLayout>

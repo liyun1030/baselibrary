@@ -11,10 +11,10 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
-            <option value="$PROJECT_DIR$/BaseLibrary" />
-            <option value="$PROJECT_DIR$/BaseLibraryProject" />
-            <option value="$PROJECT_DIR$/alipaySdk" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/basetool" />
+            <option value="$PROJECT_DIR$/permission" />
+            <option value="$PROJECT_DIR$/scanlibrary" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
