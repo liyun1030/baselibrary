@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
-    package="com.ly.test">
-
+    package="com.ly.baselibrary">
+    <uses-permission android:name="android.permission.VIBRATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
@@ -10,15 +10,38 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity"
-            tools:ignore="Instantiatable">
+        <activity android:name="com.ly.baselibrary.MainActivity">
             <intent-filter>
-                <intent-filter>
-                    <action android:name="android.intent.action.MAIN"/>
-                    <category android:name="android.intent.category.LAUNCHER"/>
-                </intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name="com.ly.baselibrary.ZBarActivity" />
+        <activity android:name="com.ly.baselibrary.ZxingScanActivity" />
+
+        <activity
+            android:name="com.ly.baselibrary.ZxingGeneratectivity"
+            android:screenOrientation="portrait" />
+        <!-- gradle配置参数 -->
+<!--        <meta-data-->
+<!--            android:name="BASE_URL"-->
+<!--            android:value="${BASE_URL}" />-->
+<!--        <meta-data-->
+<!--            android:name="BASE_SHARE_URL"-->
+<!--            android:value="${BASE_SHARE_URL}" />-->
+<!--        <meta-data-->
+<!--            android:name="CUR_ENV"-->
+<!--            android:value="${CUR_ENV}" />-->
+<!--        <meta-data-->
+<!--            android:name="VERSION_NAME"-->
+<!--            android:value="${VERSION_NAME}" />-->
+<!--        <meta-data-->
+<!--            android:name="VERSION_CODE"-->
+<!--            android:value="${VERSION_CODE}" />-->
+<!--        <meta-data-->
+<!--            android:name="PIC_HOST"-->
+<!--            android:value="${PIC_HOST}" />-->
     </application>
 
 </manifest>

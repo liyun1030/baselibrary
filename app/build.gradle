@@ -1,31 +1,161 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
+Properties properties = new Properties()
+properties.load(project.rootProject.file('gradle.properties').newDataInputStream())
 android {
-    compileSdkVersion rootProject.ext.compileSdkVersion
-    buildToolsVersion rootProject.ext.buildToolsVersion
+    compileSdkVersion build_versions.target_sdk
+    buildToolsVersion build_versions.build_tools
     defaultConfig {
         applicationId "com.ly.test"
-        flavorDimensions "default"
-        minSdkVersion rootProject.ext.libMinSdkVersion
-        targetSdkVersion rootProject.ext.targetSdkVersion
-        versionCode 2
-        versionName "1.0.0"
-        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
+        minSdkVersion build_versions.min_sdk
+        targetSdkVersion build_versions.target_sdk
+        versionCode Integer.parseInt(VERSION_CODE)
+        versionName VERSION_NAME
+
         multiDexEnabled true
-        sourceSets.main.jniLibs.srcDirs = ['libs']
+        renderscriptTargetApi 19
+        renderscriptSupportModeEnabled true
+        if ("DEV".contentEquals(BUILD_TYPE)) {
+            buildConfigField 'String', 'API_SERVER_URL', '"192.168.0.108"'
+        } else if ("TEST".contentEquals(BUILD_TYPE)) {
+            buildConfigField 'String', 'API_SERVER_URL', '"101.132.24.138"'
+        } else if ("RELEASE".contentEquals(BUILD_TYPE)) {
+            buildConfigField 'String', 'API_SERVER_URL', '"www.curefun.com"'
+        }
+        ndk {
+            abiFilters "armeabi-v7a", "armeabi"
+        }
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [moduleName: project.getName()]
             }
         }
-        ndk {
-            abiFilters "armeabi-v7a", "armeabi"
+    }
+    flavorDimensions "debug", 'dev', "release"
+    signingConfigs {
+        def appStoreFile = System.getenv("STORE_FILE")
+        def appStorePassword = System.getenv("STORE_PASSWORD")
+        def appKeyAlias = System.getenv("KEY_ALIAS")
+        def appKeyPassword = System.getenv("KEY_PASSWORD")
+        if (!appStoreFile || !appStorePassword || !appKeyAlias || !appKeyPassword) {
+            appStoreFile = "../basetool.jks"
+            appStorePassword = "liyunlong"
+            appKeyAlias = "liyun"
+            appKeyPassword = "liyunlong"
+        }
+        debug {
+            keyAlias appKeyAlias
+            keyPassword appKeyPassword
+            storeFile file(appStoreFile)
+            storePassword appStorePassword
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+
+        release {
+            keyAlias appKeyAlias
+            keyPassword appKeyPassword
+            storeFile file(appStoreFile)
+            storePassword appStorePassword
+            v1SigningEnabled true
+            v2SigningEnabled true
+        }
+        dev {
+            keyAlias appKeyAlias
+            keyPassword appKeyPassword
+            storeFile file(appStoreFile)
+            storePassword appStorePassword
+            v1SigningEnabled true
+            v2SigningEnabled true
         }
     }
-    lintOptions {
-        abortOnError false
+    //创建自己的构建版本,debug为默认版本，在buildTypes中添加即可
+    buildTypes {
+        debug {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            minifyEnabled false
+            debuggable true
+            zipAlignEnabled true
+            signingConfig signingConfigs.debug
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            applicationIdSuffix ".debug"
+            manifestPlaceholders = [BASE_URL      : DEBUG_BASE_URL,
+                                    BASE_SHARE_URL: DEBUG_SHARE_URL,
+                                    CUR_ENV       : DEBUG_ENV,
+                                    VERSION_NAME  : VERSION_NAME,
+                                    VERSION_CODE  : VERSION_CODE,
+                                    PIC_HOST      : PIC_HOST]
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    //outputFileName = APP_NAME + "_" + BUILD_TYPE + "_v" + VERSION_NAME + "_" + getDate() + ".apk"
+                    //gradle新版本无法使用+
+                    outputFileName = "${project.name}_${defaultConfig.versionName}_${variant.buildType.name}.apk"
+                }
+            }
+        }
+
+        release {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            minifyEnabled true
+            zipAlignEnabled true
+            debuggable true
+            signingConfig signingConfigs.release
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            manifestPlaceholders = [BASE_URL      : RELEASE_BASE_URL,
+                                    BASE_SHARE_URL: RELEASE_SHARE_URL,
+                                    CUR_ENV       : RELEASE_ENV,
+                                    VERSION_NAME  : VERSION_NAME,
+                                    VERSION_CODE  : VERSION_CODE,
+                                    PIC_HOST      : PIC_HOST]
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "${project.name}_${defaultConfig.versionName}_${variant.buildType.name}.apk"
+                }
+            }
+        }
+        dev {
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+            minifyEnabled false
+            zipAlignEnabled true
+            debuggable true
+            signingConfig signingConfigs.dev
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+//            applicationIdSuffix ".dev"
+            manifestPlaceholders = [BASE_URL      : DEV_BASE_URL,
+                                    BASE_SHARE_URL: DEV_SHARE_URL,
+                                    CUR_ENV       : DEV_ENV,
+                                    VERSION_NAME  : VERSION_NAME,
+                                    VERSION_CODE  : VERSION_CODE,
+                                    PIC_HOST      : PIC_HOST]
+            android.applicationVariants.all { variant ->
+                variant.outputs.all {
+                    outputFileName = "${project.name}_${defaultConfig.versionName}_${variant.buildType.name}.apk"
+                }
+            }
+        }
+    }
+    //1 productFlavors主要是用来做多渠道打包等操作会用到
+    //2 如果你的应用会使用到不同的API_URL，不同的版本号，相同的代码需要生成不同的apk文件等等，都可以在productFlavors上做文章
+    productFlavors {
+        product_release {
+            signingConfig signingConfigs.release
+            dimension "release"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationIdSuffix ".release"//applicationId后追加
+        }
+        product_dev {
+            signingConfig signingConfigs.dev
+            dimension "dev"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationIdSuffix ".dev"//applicationId后追加
+        }
+        product_debug {
+            signingConfig signingConfigs.debug
+            dimension "debug"
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+            applicationIdSuffix ".debug"//applicationId后追加
+        }
     }
     dexOptions {
         preDexLibraries false
@@ -36,24 +166,53 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
+    sourceSets {
+        main.jniLibs.srcDirs = ['libs']
+    }
     packagingOptions {
-        exclude 'META-INF/DEPENDENCIES'
-        exclude 'META-INF/LICENSE'
-        exclude 'META-INFTICE'
-        exclude 'META-INF/LICENSE.txt'
-        exclude 'META-INFTICE.txt'
         exclude 'META-INF/proguard/androidx-annotations.pro'
     }
-    buildTypes {
-        release {
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+    lintOptions {
+        abortOnError false
+        checkReleaseBuilds false
+    }
+}
+//获取时间戳
+def getDate() {
+    def date = new Date()
+    def formattedDate = date.format('yyyyMMddHHmm')
+    return formattedDate
+}
+// 用于指定所有aar引用同样版本的support包
+configurations.all {
+    resolutionStrategy.eachDependency { details ->
+        def requested = details.requested
+        if (requested.group == 'com.android.support') {
+            if (!requested.name.startsWith("multidex")) {
+                details.useVersion '28.0.0'
+            }
         }
     }
 }
-
 dependencies {
     implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$kotlin_version"
-    api project(':BaseLibrary')
+    implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin_version"
+    implementation develop.support.constraint_layout
+    implementation develop.support.appcompat
+    implementation develop.support.recyclerview
+    implementation develop.glide.glide
+    implementation develop.rxjava.rxjava2
+    implementation develop.rxjava.rxandroid
+    implementation develop.retrofit2.retrofit
+
+    implementation develop.permissions.easypermission
+    implementation develop.bingoogolapple.photopicker
+    implementation develop.bingoogolapple.baseadapter
+    implementation develop.bingoogolapple.flowlayout
+
+    implementation develop.zxing
+
+    implementation project(':basetool')
+    implementation project(':scanlibrary')
+
 }

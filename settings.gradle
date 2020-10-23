@@ -1,2 +1,3 @@
-include ':BaseLibrary',':app',':alipaySdk',
-rootProject.name = "BaseLibraryProject"
+include ':scanlibrary'
+include ':basetool',':app',":permission"
+rootProject.name = "baselibrary"
