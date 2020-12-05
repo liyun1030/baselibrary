@@ -208,12 +208,13 @@ dependencies {
     implementation develop.rxjava.rxandroid
     implementation develop.retrofit2.retrofit
 
-    implementation develop.permissions.easypermission
     implementation develop.bingoogolapple.photopicker
-    implementation develop.bingoogolapple.baseadapter
-    implementation develop.bingoogolapple.flowlayout
+    implementation develop.bingoogolapple.flowlayout{
+        exclude group: 'uk.co.senab.photoview'
+    }
 
-    implementation develop.zxing
+
+    implementation develop.permissions.easypermission
     implementation develop.kotlin_coroutines.kotlinx_coroutines_android
     implementation develop.kotlin_coroutines.kotlinx_coroutines_core
     implementation project(':basetool')
