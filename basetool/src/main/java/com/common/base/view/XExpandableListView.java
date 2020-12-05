@@ -14,7 +14,7 @@ import android.widget.Scroller;
 import android.widget.TextView;
 
 import com.common.base.R;
-import com.common.base.tools.TimeUtil;
+import com.common.base.tool.TimeUtil;
 
 public class XExpandableListView extends ExpandableListView implements
 		OnScrollListener {

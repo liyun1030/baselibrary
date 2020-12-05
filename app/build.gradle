@@ -29,6 +29,7 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [moduleName: project.getName()]
+                includeCompileClasspath = true
             }
         }
     }
@@ -82,6 +83,7 @@ android {
 //            applicationIdSuffix ".debug"
             manifestPlaceholders = [BASE_URL      : DEBUG_BASE_URL,
                                     BASE_SHARE_URL: DEBUG_SHARE_URL,
+                                    TENCENT_APPKEY_VALUE: properties.getProperty("tencentAppKey"),
                                     CUR_ENV       : DEBUG_ENV,
                                     VERSION_NAME  : VERSION_NAME,
                                     VERSION_CODE  : VERSION_CODE,
@@ -171,6 +173,7 @@ android {
     }
     packagingOptions {
         exclude 'META-INF/proguard/androidx-annotations.pro'
+        exclude 'META-INF/proguard/coroutines.pro'
     }
     lintOptions {
         abortOnError false
@@ -211,7 +214,8 @@ dependencies {
     implementation develop.bingoogolapple.flowlayout
 
     implementation develop.zxing
-
+    implementation develop.kotlin_coroutines.kotlinx_coroutines_android
+    implementation develop.kotlin_coroutines.kotlinx_coroutines_core
     implementation project(':basetool')
     implementation project(':scanlibrary')
 

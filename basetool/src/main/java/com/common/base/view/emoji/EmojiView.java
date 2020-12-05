@@ -24,7 +24,7 @@ import android.widget.LinearLayout;
 
 import com.common.base.R;
 import com.common.base.adapter.EmojiAdapter;
-import com.common.base.tools.BaseConstant;
+import com.common.base.tool.BaseConstant;
 
 import java.util.ArrayList;
 import java.util.HashMap;

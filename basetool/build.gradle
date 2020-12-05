@@ -16,6 +16,7 @@ android {
         javaCompileOptions {
             annotationProcessorOptions {
                 arguments = [moduleName: project.getName()]
+                includeCompileClasspath = true
             }
         }
         sourceSets.main.jniLibs.srcDirs = ['libs']
@@ -74,7 +75,6 @@ dependencies {
 
     //运行时权限
     implementation develop.permissions.easypermission
-    implementation  develop.butterknife.butterknife_compiler
     //可修改选中项字体大小和指示器长度的TabLayout
 
     //xrecyclerview下拉刷新列表

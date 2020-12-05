@@ -8,12 +8,17 @@ import android.graphics.Matrix;
 import android.graphics.Paint;
 import android.graphics.RectF;
 import android.graphics.Shader;
+import android.support.annotation.NonNull;
 
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.Transformation;
 import com.bumptech.glide.load.engine.Resource;
 import com.bumptech.glide.load.engine.bitmap_recycle.BitmapPool;
 import com.bumptech.glide.load.resource.bitmap.BitmapResource;
+
+import org.jetbrains.annotations.NotNull;
+
+import java.security.MessageDigest;
 
 /**
  * created by 李云 on 2019/6/25
@@ -46,8 +51,9 @@ public class CornerTransform implements Transformation<Bitmap> {
         this.radius = radius;
     }
 
+    @NotNull
     @Override
-    public Resource<Bitmap> transform(Resource<Bitmap> resource, int outWidth, int outHeight) {
+    public Resource<Bitmap> transform( Context context,Resource<Bitmap> resource, int outWidth, int outHeight) {
         Bitmap source = resource.get();
         int finalWidth, finalHeight;
         float ratio; //输出目标的宽高或高宽比例
@@ -117,8 +123,10 @@ public class CornerTransform implements Transformation<Bitmap> {
         return BitmapResource.obtain(outBitmap, this.mBitmapPool);
     }
 
+
+
     @Override
-    public String getId() {
-        return this.getClass().getName();
+    public void updateDiskCacheKey(@NonNull MessageDigest messageDigest) {
+
     }
 }

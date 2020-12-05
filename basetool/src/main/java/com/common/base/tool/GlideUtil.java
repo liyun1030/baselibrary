@@ -9,7 +9,6 @@ import android.text.TextUtils;
 import android.util.Base64;
 import android.widget.ImageView;
 
-import com.bumptech.glide.BitmapTypeRequest;
 import com.bumptech.glide.Glide;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.common.base.R;
@@ -38,7 +37,7 @@ public class GlideUtil {
                 .load(holderResId)
 //                .placeholder(R.drawable.ic_qr_default)
 //                .error(R.color.abc_tab_text_normal)
-                .crossFade()
+                .centerCrop()
                 .into(imageVie);
     }
 
@@ -127,11 +126,11 @@ public class GlideUtil {
             decode = Base64.decode(url, Base64.DEFAULT);
         }
 
-        BitmapTypeRequest bitmapTypeRequest = Glide.with(ctx).load(decode == null ? url : decode).asBitmap();
-//        bitmapTypeRequest.placeholder(R.drawable.ic_qr_default);
-        bitmapTypeRequest.diskCacheStrategy(DiskCacheStrategy.RESULT);
-        bitmapTypeRequest.dontAnimate();
-        bitmapTypeRequest.into(imageView);
+//        BitmapTypeRequest bitmapTypeRequest = Glide.with(ctx).load(decode == null ? url : decode).asBitmap();
+////        bitmapTypeRequest.placeholder(R.drawable.ic_qr_default);
+//        bitmapTypeRequest.diskCacheStrategy(DiskCacheStrategy.RESULT);
+//        bitmapTypeRequest.dontAnimate();
+//        bitmapTypeRequest.into(imageView);
     }
     public static Bitmap stringToBitmap(String string) {
         Bitmap bitmap = null;
