@@ -1,3 +1,2 @@
-include ':scanlibrary'
 include ':basetool',':app',":permission"
 rootProject.name = "baselibrary"

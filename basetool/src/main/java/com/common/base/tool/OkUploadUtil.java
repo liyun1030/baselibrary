@@ -1,6 +1,6 @@
 package com.common.base.tool;
 
-import com.lzy.imagepicker.bean.ImageItem;
+import com.common.base.bean.ImageItem;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.convert.StringConvert;
 import com.lzy.okgo.db.UploadManager;

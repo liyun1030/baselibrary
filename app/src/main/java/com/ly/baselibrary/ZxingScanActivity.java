@@ -9,9 +9,9 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
-import com.basely.scan.core.BarcodeType;
-import com.basely.scan.core.QRCodeView;
-import com.basely.scan.zxing.ZXingView;
+import com.common.base.qrcode.core.BarcodeType;
+import com.common.base.qrcode.core.QRCodeView;
+import com.common.base.zxing.ZXingView;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.DecodeHintType;
 
@@ -206,9 +206,7 @@ public class ZxingScanActivity extends AppCompatActivity implements QRCodeView.D
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
-
         mZXingView.startSpotAndShowRect(); // 显示扫描框，并开始识别
-
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_CHOOSE_QRCODE_FROM_GALLERY) {
             final String picturePath = BGAPhotoPickerActivity.getSelectedPhotos(data).get(0);
             // 本来就用到 QRCodeView 时可直接调 QRCodeView 的方法，走通用的回调

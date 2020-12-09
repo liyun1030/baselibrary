@@ -34,13 +34,13 @@ repositories {
 }
 
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation develop.support.appcompat
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api develop.support.appcompat
     //权限申请
-    implementation develop.permissions.hipermission
+    api develop.permissions.hipermission
     //Guava工程包含了若干被Google的 Java项目广泛依赖 的核心库，例如：
     //集合 [collections],缓存 [caching],原生类型支持 [primitives support],并发库 [concurrency libraries]
     //通用注解 [common annotations],字符串处理 [string processing],I/O 等等。
-    implementation develop.guava
-    implementation develop.activityLauncher
+    api develop.guava
+    api develop.activityLauncher
 }

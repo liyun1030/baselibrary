@@ -12,9 +12,10 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.basely.scan.core.BGAQRCodeUtil;
-import com.basely.scan.zxing.QRCodeDecoder;
-import com.basely.scan.zxing.QRCodeEncoder;
+import com.common.base.qrcode.core.BGAQRCodeUtil;
+import com.common.base.zxing.QRCodeDecoder;
+import com.common.base.zxing.QRCodeEncoder;
+
 
 public class ZxingGeneratectivity extends AppCompatActivity {
     private ImageView mChineseIv;

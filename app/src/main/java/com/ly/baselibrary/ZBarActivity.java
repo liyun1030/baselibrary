@@ -9,16 +9,17 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 
-import com.basely.scan.core.BarcodeType;
-import com.basely.scan.core.QRCodeView;
-import com.basely.scan.zbar.BarcodeFormat;
-import com.basely.scan.zbar.ZBarView;
+import com.common.base.qrcode.core.BarcodeType;
+import com.common.base.qrcode.core.QRCodeView;
+import com.common.base.zbar.BarcodeFormat;
+import com.common.base.zbar.ZBarView;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import cn.bingoogolapple.photopicker.activity.BGAPhotoPickerActivity;
 import pub.devrel.easypermissions.EasyPermissions;
+
 
 public class ZBarActivity extends AppCompatActivity implements QRCodeView.Delegate, EasyPermissions.PermissionCallbacks{
     private static final String TAG = ZBarActivity.class.getSimpleName();
@@ -203,7 +204,7 @@ public class ZBarActivity extends AppCompatActivity implements QRCodeView.Delega
         mZBarView.showScanRect();
 
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_CHOOSE_QRCODE_FROM_GALLERY) {
-            final String picturePath = BGAPhotoPickerActivity.getSelectedPhotos(data).get(0);
+            String picturePath = BGAPhotoPickerActivity.getSelectedPhotos(data).get(0);
             mZBarView.decodeQRCode(picturePath);
         }
     }

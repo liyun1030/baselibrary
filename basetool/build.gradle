@@ -49,6 +49,26 @@ android {
             assets.srcDirs = ['src/main/assets', 'src/main/assets/']
         }
     }
+    def isBuildSo = false
+    if (isBuildSo) { // 构建生成 so 文件
+        sourceSets {
+            main {
+                jniLibs.srcDirs = []
+            }
+        }
+        externalNativeBuild {
+            ndkBuild {
+                path 'src/main/jni/Android.mk'
+            }
+        }
+    } else { // 生成 so 文件后，打包时直接使用生成的 so
+        sourceSets {
+            main {
+                jni.srcDirs = []
+            }
+        }
+        delete(file('.externalNativeBuild'), file('src/main/libs'), file('src/main/obj'))
+    }
 }
 repositories {
     flatDir {
@@ -56,85 +76,71 @@ repositories {
     }
 }
 dependencies {
-    implementation fileTree(dir: 'libs', include: ['*.jar'])
-    implementation develop.support.appcompat
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin_version"
-    implementation develop.support.design
-    implementation develop.multidex
-    implementation develop.support.constraint_layout
-    implementation project(path: ':scanlibrary')
-    androidTestImplementation 'com.android.support.test:runner:1.0.2'
-    androidTestImplementation('com.android.support.test.espresso:espresso-core:3.0.2', {
-        exclude group: 'com.android.support', module: 'support-annotations'
-    })
+    api fileTree(dir: 'libs', include: ['*.jar'])
+    api develop.support.appcompat
+    api "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin_version"
+    api develop.support.design
+    api develop.multidex
+    api develop.support.constraint_layout
 
     //圆角图片组件
-    implementation develop.glide.glide
+    api develop.glide.glide
+    annotationProcessor develop.glide.compiler
     //注解器
-    implementation  develop.butterknife.butterknife
-    implementation  develop.butterknife.butterknife_compiler
-    //二维码
-    implementation develop.zxing
+    api develop.butterknife.butterknife
+    annotationProcessor develop.butterknife.butterknife_compiler
     //运行时权限
-    implementation develop.permissions.easypermission
+    api develop.permissions.easypermission
     //可修改选中项字体大小和指示器长度的TabLayout
 
     //xrecyclerview下拉刷新列表
-    implementation develop.xrecyclerview
+    api develop.xrecyclerview
 
     //alibaba-fastjson库
-    implementation develop.fastjson
+    api develop.fastjson
     /*网络监测*/
     debugImplementation develop.readystatesoftware.readystatesoftware
     releaseImplementation develop.readystatesoftware.readystatesoftware_noop
     //google gson
-    implementation develop.gson
-    implementation develop.fastjson
-
-    //支持类似微博的文本效果，表情、@某人、话题、url链接等。DEMO同时演示了MVVM模式的使用。
-    //    api 'com.github.CarGuo:RickText:v1.0.5'
+    api develop.gson
+    api develop.fastjson
 
     //base64-编解码
     api files('libs/sun.misc.BASE64Decoder.jar')
 
     //必须使用
-    implementation develop.ok_http.okgo
-    //以下三个选择添加，okrx和okrx2不能同时使用
+    api develop.ok_http.okgo
 
-    //    api 'com.lzy.net:okrx2:2.0.2'--上传和下载
-    implementation develop.ok_http.okserver
-    //辅助沉浸式
-    implementation develop.imagepicker
+    api develop.ok_http.okserver
 
     //导入RxJava 和 RxAndroid
-    implementation develop.rxjava.rxjava2
-    implementation develop.rxjava.rxandroid
-    //        compile 'com.google.code.gson:gson:2.6.2'
+    api develop.rxjava.rxjava2
+    api develop.rxjava.rxandroid
 
     //导入retrofit
-    implementation develop.retrofit2.retrofit
-    implementation develop.retrofit2.gson
-    implementation develop.retrofit2.adapter_rxjava2
+    api develop.retrofit2.retrofit
+    api develop.retrofit2.gson
+    api develop.retrofit2.adapter_rxjava2
 
     //添加HttpLoggingInterceptor进行调试
-    implementation develop.ok_http.logging_interceptor
-    implementation develop.multitype
-    implementation(develop.rxbus) {
+    api develop.ok_http.logging_interceptor
+    api develop.multitype
+    api(develop.rxbus) {
         exclude group: 'com.android.support'
     }
     //状态栏沉浸式
-    implementation develop.barlibrary
+    api develop.barlibrary
     //权限申请
-    implementation files('libs/open_sdk_r5509.jar')
-    implementation files('libs/mta-sdk-1.6.2.jar')
-    implementation files('libs/weibosdkcore_release.jar')
+    api files('libs/open_sdk_r5509.jar')
+    api files('libs/mta-sdk-1.6.2.jar')
+    api files('libs/weibosdkcore_release.jar')
 
-
-    //图片选择
-    implementation develop.galleryfinal
-    implementation develop.support.support_v4
-
+    api develop.support.support_v4
+    api develop.google_zxing
+    api develop.bingoogolapple.photopicker
+    api develop.bingoogolapple.flowlayout
+    api develop.bingoogolapple.qrcode_core
     //侧滑返回
-    implementation develop.swipebacklayout
-    implementation develop.opensdk
+    api develop.swipebacklayout
+    api develop.opensdk
 }

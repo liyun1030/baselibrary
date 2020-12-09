@@ -81,13 +81,13 @@ android {
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 //            applicationIdSuffix ".debug"
-            manifestPlaceholders = [BASE_URL      : DEBUG_BASE_URL,
-                                    BASE_SHARE_URL: DEBUG_SHARE_URL,
+            manifestPlaceholders = [BASE_URL            : DEBUG_BASE_URL,
+                                    BASE_SHARE_URL      : DEBUG_SHARE_URL,
                                     TENCENT_APPKEY_VALUE: properties.getProperty("tencentAppKey"),
-                                    CUR_ENV       : DEBUG_ENV,
-                                    VERSION_NAME  : VERSION_NAME,
-                                    VERSION_CODE  : VERSION_CODE,
-                                    PIC_HOST      : PIC_HOST]
+                                    CUR_ENV             : DEBUG_ENV,
+                                    VERSION_NAME        : VERSION_NAME,
+                                    VERSION_CODE        : VERSION_CODE,
+                                    PIC_HOST            : PIC_HOST]
             android.applicationVariants.all { variant ->
                 variant.outputs.all {
                     //outputFileName = APP_NAME + "_" + BUILD_TYPE + "_v" + VERSION_NAME + "_" + getDate() + ".apk"
@@ -172,7 +172,6 @@ android {
         main.jniLibs.srcDirs = ['libs']
     }
     packagingOptions {
-        exclude 'META-INF/proguard/androidx-annotations.pro'
         exclude 'META-INF/proguard/coroutines.pro'
     }
     lintOptions {
@@ -198,26 +197,17 @@ configurations.all {
     }
 }
 dependencies {
-    implementation fileTree(dir: "libs", include: ["*.jar"])
-    implementation "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin_version"
-    implementation develop.support.constraint_layout
-    implementation develop.support.appcompat
-    implementation develop.support.recyclerview
-    implementation develop.glide.glide
-    implementation develop.rxjava.rxjava2
-    implementation develop.rxjava.rxandroid
-    implementation develop.retrofit2.retrofit
-
-    implementation develop.bingoogolapple.photopicker
-    implementation develop.bingoogolapple.flowlayout{
-        exclude group: 'uk.co.senab.photoview'
-    }
-
-
-    implementation develop.permissions.easypermission
-    implementation develop.kotlin_coroutines.kotlinx_coroutines_android
-    implementation develop.kotlin_coroutines.kotlinx_coroutines_core
+    api fileTree(dir: "libs", include: ["*.jar"])
+    api "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin_version"
+    api develop.support.constraint_layout
+    api develop.support.appcompat
+    api develop.support.recyclerview
+    api develop.rxjava.rxjava2
+    api develop.rxjava.rxandroid
+    api develop.retrofit2.retrofit
+    api develop.permissions.easypermission
+    api develop.kotlin_coroutines.kotlinx_coroutines_android
+    api develop.kotlin_coroutines.kotlinx_coroutines_core
     implementation project(':basetool')
-    implementation project(':scanlibrary')
 
 }

@@ -8,7 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.View;
 
-import com.basely.scan.core.BGAQRCodeUtil;
+import com.common.base.qrcode.core.BGAQRCodeUtil;
 
 import java.util.List;
 
