@@ -1,6 +1,6 @@
 package com.common.base.adapter;
 
-import android.support.annotation.NonNull;
+
 
 import java.util.List;
 
@@ -13,20 +13,20 @@ import me.drakeet.multitype.TypePool;
  */
 public class BaseMultiTypeAdapter extends MultiTypeAdapter {
 
-    public BaseMultiTypeAdapter(@NonNull List<? extends Item> items) {
+    public BaseMultiTypeAdapter( List<? extends Item> items) {
         super(items);
     }
 
-    public BaseMultiTypeAdapter(@NonNull List<? extends Item> items, TypePool pool) {
+    public BaseMultiTypeAdapter( List<? extends Item> items, TypePool pool) {
         super(items, pool);
     }
 
-    public void setItems(@NonNull List items) {
+    public void setItems( List items) {
         this.items.clear();
         this.items.addAll(items);
     }
 
-    public void addItems(@NonNull List items) {
+    public void addItems( List items) {
         this.items.addAll(items);
     }
 

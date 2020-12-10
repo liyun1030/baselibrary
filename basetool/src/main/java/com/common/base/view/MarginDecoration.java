@@ -2,8 +2,10 @@ package com.common.base.view;
 
 import android.content.Context;
 import android.graphics.Rect;
-import android.support.v7.widget.RecyclerView;
 import android.view.View;
+
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.common.base.tool.AndroidUtil;
 

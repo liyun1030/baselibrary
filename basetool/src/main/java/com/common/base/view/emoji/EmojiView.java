@@ -5,9 +5,6 @@ import android.content.pm.ApplicationInfo;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
-import android.support.annotation.Nullable;
-import android.support.v4.view.PagerAdapter;
-import android.support.v4.view.ViewPager;
 import android.text.Spannable;
 import android.text.SpannableStringBuilder;
 import android.text.TextUtils;
@@ -21,6 +18,9 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+
+import androidx.viewpager.widget.PagerAdapter;
+import androidx.viewpager.widget.ViewPager;
 
 import com.common.base.R;
 import com.common.base.adapter.EmojiAdapter;
@@ -64,13 +64,13 @@ public class EmojiView extends LinearLayout {
         initView();
     }
 
-    public EmojiView(Context context, @Nullable AttributeSet attrs) {
+    public EmojiView(Context context,  AttributeSet attrs) {
         super(context, attrs);
         this.ctx = context;
         initView();
     }
 
-    public EmojiView(Context context, @Nullable AttributeSet attrs, int defStyleAttr) {
+    public EmojiView(Context context,  AttributeSet attrs, int defStyleAttr) {
         super(context, attrs, defStyleAttr);
         this.ctx = context;
         initView();

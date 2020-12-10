@@ -5,15 +5,18 @@ import android.util.AttributeSet;
 import android.util.Log;
 import android.view.MotionEvent;
 import android.view.WindowManager;
-import android.widget.ImageView;
+
+import androidx.appcompat.widget.AppCompatImageView;
 
 import com.common.base.tool.WindowManagerInstance;
+
+import static com.tencent.open.utils.Global.getContext;
 
 /**
  * Description：全局悬浮窗口
  */
 
-public class FloatView extends android.support.v7.widget.AppCompatImageView {
+public class FloatView extends AppCompatImageView {
     private final int statusHeight;
     int sW;
     int sH;

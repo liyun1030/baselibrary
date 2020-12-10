@@ -1,11 +1,11 @@
 package com.common.base.adapter;
 
 import android.content.Context;
-import android.support.annotation.Nullable;
-import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import java.util.Collection;
@@ -66,7 +66,7 @@ public abstract class BaseRecyclerAdapter<T>  extends RecyclerView.Adapter<Recyc
     public View.OnClickListener getitemviewOnClickListener(final int position) {
         return new View.OnClickListener() {
             @Override
-            public void onClick(@Nullable View v) {
+            public void onClick( View v) {
                 if (listener != null && v != null) {
                     listener.onItemClick(v, dataSources.get(position), position);//回调
                 }

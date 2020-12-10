@@ -2,8 +2,9 @@ package com.common.base.application;
 
 import android.os.Build;
 import android.os.StrictMode;
-import android.support.multidex.MultiDex;
-import android.support.multidex.MultiDexApplication;
+
+import androidx.multidex.MultiDex;
+import androidx.multidex.MultiDexApplication;
 
 import com.common.base.network.TokenInterceptor;
 import com.common.base.tool.SharedPreferencesUtils;

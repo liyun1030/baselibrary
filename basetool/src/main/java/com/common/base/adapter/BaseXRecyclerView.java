@@ -1,8 +1,9 @@
 package com.common.base.adapter;
 
 import android.content.Context;
-import android.support.v7.widget.LinearLayoutManager;
 import android.util.AttributeSet;
+
+import androidx.recyclerview.widget.LinearLayoutManager;
 
 import com.common.base.R;
 import com.common.base.view.MarginDecoration;

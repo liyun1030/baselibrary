@@ -2,13 +2,13 @@ package com.common.base.fragment;
 
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+
+
+import androidx.fragment.app.Fragment;
 
 import com.hwangjr.rxbus.RxBus;
 import java.util.List;
@@ -33,7 +33,7 @@ public abstract class BaseFragment extends Fragment implements EasyPermissions.P
 
 
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated( View view,  Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         Log.e("onCreate", this.getClass().getSimpleName().toString());
         unbinder = ButterKnife.bind(this, view);
@@ -103,7 +103,7 @@ public abstract class BaseFragment extends Fragment implements EasyPermissions.P
      * @param perms       申请的权限的名字
      */
     @Override
-    public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
+    public void onPermissionsGranted(int requestCode,  List<String> perms) {
         Log.i("EasyPermissions", "获取成功的权限$perms");
     }
 
@@ -113,7 +113,7 @@ public abstract class BaseFragment extends Fragment implements EasyPermissions.P
      * @param perms       申请的权限的名字
      */
     @Override
-    public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
+    public void onPermissionsDenied(int requestCode,  List<String> perms) {
         //处理权限名字字符串
         StringBuffer sb = new StringBuffer();
         for (String str : perms) {
@@ -141,7 +141,7 @@ public abstract class BaseFragment extends Fragment implements EasyPermissions.P
      * @param grantResults 授权结果
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode,  String[] permissions,  int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }

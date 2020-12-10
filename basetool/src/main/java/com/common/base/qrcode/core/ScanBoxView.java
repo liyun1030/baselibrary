@@ -18,6 +18,8 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 
+import com.common.base.R;
+
 public class ScanBoxView extends View {
     private int mMoveStepDistance;
     private int mAnimDelayTime;
@@ -131,7 +133,7 @@ public class ScanBoxView extends View {
     void init(QRCodeView qrCodeView, AttributeSet attrs) {
         mQRCodeView = qrCodeView;
 
-        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView);
+        TypedArray typedArray = getContext().obtainStyledAttributes(attrs, R.styleable.QRCodeView);
         final int count = typedArray.getIndexCount();
         for (int i = 0; i < count; i++) {
             initCustomAttr(typedArray.getIndex(i), typedArray);
@@ -142,73 +144,73 @@ public class ScanBoxView extends View {
     }
 
     private void initCustomAttr(int attr, TypedArray typedArray) {
-        if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_topOffset) {
+        if (attr == R.styleable.QRCodeView_qrcv_topOffset) {
             mTopOffset = typedArray.getDimensionPixelSize(attr, mTopOffset);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_cornerSize) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_cornerSize) {
             mCornerSize = typedArray.getDimensionPixelSize(attr, mCornerSize);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_cornerLength) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_cornerLength) {
             mCornerLength = typedArray.getDimensionPixelSize(attr, mCornerLength);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_scanLineSize) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_scanLineSize) {
             mScanLineSize = typedArray.getDimensionPixelSize(attr, mScanLineSize);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_rectWidth) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_rectWidth) {
             mRectWidth = typedArray.getDimensionPixelSize(attr, mRectWidth);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_maskColor) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_maskColor) {
             mMaskColor = typedArray.getColor(attr, mMaskColor);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_cornerColor) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_cornerColor) {
             mCornerColor = typedArray.getColor(attr, mCornerColor);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_scanLineColor) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_scanLineColor) {
             mScanLineColor = typedArray.getColor(attr, mScanLineColor);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_scanLineMargin) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_scanLineMargin) {
             mScanLineMargin = typedArray.getDimensionPixelSize(attr, mScanLineMargin);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_isShowDefaultScanLineDrawable) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_isShowDefaultScanLineDrawable) {
             mIsShowDefaultScanLineDrawable = typedArray.getBoolean(attr, mIsShowDefaultScanLineDrawable);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_customScanLineDrawable) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_customScanLineDrawable) {
             mCustomScanLineDrawable = typedArray.getDrawable(attr);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_borderSize) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_borderSize) {
             mBorderSize = typedArray.getDimensionPixelSize(attr, mBorderSize);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_borderColor) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_borderColor) {
             mBorderColor = typedArray.getColor(attr, mBorderColor);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_animTime) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_animTime) {
             mAnimTime = typedArray.getInteger(attr, mAnimTime);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_verticalBias) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_verticalBias) {
             mVerticalBias = typedArray.getFloat(attr, mVerticalBias);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_cornerDisplayType) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_cornerDisplayType) {
             mCornerDisplayType = typedArray.getInteger(attr, mCornerDisplayType);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_toolbarHeight) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_toolbarHeight) {
             mToolbarHeight = typedArray.getDimensionPixelSize(attr, mToolbarHeight);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_barcodeRectHeight) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_barcodeRectHeight) {
             mBarcodeRectHeight = typedArray.getDimensionPixelSize(attr, mBarcodeRectHeight);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_isBarcode) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_isBarcode) {
             mIsBarcode = typedArray.getBoolean(attr, mIsBarcode);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_barCodeTipText) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_barCodeTipText) {
             mBarCodeTipText = typedArray.getString(attr);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_qrCodeTipText) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_qrCodeTipText) {
             mQRCodeTipText = typedArray.getString(attr);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_tipTextSize) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_tipTextSize) {
             mTipTextSize = typedArray.getDimensionPixelSize(attr, mTipTextSize);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_tipTextColor) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_tipTextColor) {
             mTipTextColor = typedArray.getColor(attr, mTipTextColor);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_isTipTextBelowRect) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_isTipTextBelowRect) {
             mIsTipTextBelowRect = typedArray.getBoolean(attr, mIsTipTextBelowRect);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_tipTextMargin) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_tipTextMargin) {
             mTipTextMargin = typedArray.getDimensionPixelSize(attr, mTipTextMargin);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_isShowTipTextAsSingleLine) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_isShowTipTextAsSingleLine) {
             mIsShowTipTextAsSingleLine = typedArray.getBoolean(attr, mIsShowTipTextAsSingleLine);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_isShowTipBackground) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_isShowTipBackground) {
             mIsShowTipBackground = typedArray.getBoolean(attr, mIsShowTipBackground);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_tipBackgroundColor) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_tipBackgroundColor) {
             mTipBackgroundColor = typedArray.getColor(attr, mTipBackgroundColor);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_isScanLineReverse) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_isScanLineReverse) {
             mIsScanLineReverse = typedArray.getBoolean(attr, mIsScanLineReverse);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_isShowDefaultGridScanLineDrawable) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_isShowDefaultGridScanLineDrawable) {
             mIsShowDefaultGridScanLineDrawable = typedArray.getBoolean(attr, mIsShowDefaultGridScanLineDrawable);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_customGridScanLineDrawable) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_customGridScanLineDrawable) {
             mCustomGridScanLineDrawable = typedArray.getDrawable(attr);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_isOnlyDecodeScanBoxArea) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_isOnlyDecodeScanBoxArea) {
             mIsOnlyDecodeScanBoxArea = typedArray.getBoolean(attr, mIsOnlyDecodeScanBoxArea);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_isShowLocationPoint) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_isShowLocationPoint) {
             mIsShowLocationPoint = typedArray.getBoolean(attr, mIsShowLocationPoint);
-        } else if (attr == cn.bingoogolapple.qrcode.core.R.styleable.QRCodeView_qrcv_isAutoZoom) {
+        } else if (attr == R.styleable.QRCodeView_qrcv_isAutoZoom) {
             mIsAutoZoom = typedArray.getBoolean(attr, mIsAutoZoom);
         }
     }
@@ -218,7 +220,7 @@ public class ScanBoxView extends View {
             mOriginQRCodeGridScanLineBitmap = ((BitmapDrawable) mCustomGridScanLineDrawable).getBitmap();
         }
         if (mOriginQRCodeGridScanLineBitmap == null) {
-            mOriginQRCodeGridScanLineBitmap = BitmapFactory.decodeResource(getResources(), cn.bingoogolapple.qrcode.core.R.mipmap.qrcode_default_grid_scan_line);
+            mOriginQRCodeGridScanLineBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.qrcode_default_grid_scan_line);
             mOriginQRCodeGridScanLineBitmap = BGAQRCodeUtil.makeTintBitmap(mOriginQRCodeGridScanLineBitmap, mScanLineColor);
         }
         mOriginBarCodeGridScanLineBitmap = BGAQRCodeUtil.adjustPhotoRotation(mOriginQRCodeGridScanLineBitmap, 90);
@@ -230,7 +232,7 @@ public class ScanBoxView extends View {
             mOriginQRCodeScanLineBitmap = ((BitmapDrawable) mCustomScanLineDrawable).getBitmap();
         }
         if (mOriginQRCodeScanLineBitmap == null) {
-            mOriginQRCodeScanLineBitmap = BitmapFactory.decodeResource(getResources(), cn.bingoogolapple.qrcode.core.R.mipmap.qrcode_default_scan_line);
+            mOriginQRCodeScanLineBitmap = BitmapFactory.decodeResource(getResources(), R.mipmap.qrcode_default_scan_line);
             mOriginQRCodeScanLineBitmap = BGAQRCodeUtil.makeTintBitmap(mOriginQRCodeScanLineBitmap, mScanLineColor);
         }
         mOriginBarCodeScanLineBitmap = BGAQRCodeUtil.adjustPhotoRotation(mOriginQRCodeScanLineBitmap, 90);

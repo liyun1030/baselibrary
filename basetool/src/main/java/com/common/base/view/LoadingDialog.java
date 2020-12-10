@@ -3,7 +3,6 @@ package com.common.base.view;
 import android.app.Dialog;
 import android.content.Context;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
 import android.util.Log;
 import android.view.WindowManager;
 import android.view.animation.LinearInterpolator;
@@ -26,11 +25,11 @@ public class LoadingDialog  extends Dialog {
     private boolean mCancelable;
     private RotateAnimation mRotateAnimation;
 
-    public LoadingDialog(@NonNull Context context, String message, int imageId) {
+    public LoadingDialog( Context context, String message, int imageId) {
         this(context,R.style.LoadingDialog,message,imageId,true);
     }
 
-    public LoadingDialog(@NonNull Context context, int themeResId, String message, int imageId, boolean cancelable) {
+    public LoadingDialog( Context context, int themeResId, String message, int imageId, boolean cancelable) {
         super(context, themeResId);
         mMessage = message;
         mImageId = imageId;
@@ -75,7 +74,7 @@ public class LoadingDialog  extends Dialog {
     }
 
 //    @Override
-//    public boolean onKeyDown(int keyCode, @NonNull KeyEvent event) {
+//    public boolean onKeyDown(int keyCode,  KeyEvent event) {
 //        if(keyCode == KeyEvent.KEYCODE_BACK){
 //            // 屏蔽返回键
 //            return mCancelable;

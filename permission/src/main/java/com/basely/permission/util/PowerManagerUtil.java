@@ -1,14 +1,15 @@
 package com.basely.permission.util;
 
-import static android.content.Context.BATTERY_SERVICE;
-
-import java.lang.reflect.Method;
-
 import android.content.Context;
 import android.os.BatteryManager;
 import android.os.Build;
 import android.os.PowerManager;
-import android.support.annotation.RequiresApi;
+
+import androidx.annotation.RequiresApi;
+
+import java.lang.reflect.Method;
+
+import static android.content.Context.BATTERY_SERVICE;
 
 /**
  * 电源管理

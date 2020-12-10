@@ -138,8 +138,9 @@ dependencies {
     api develop.support.support_v4
     api develop.google_zxing
     api develop.bingoogolapple.photopicker
+    api develop.bingoogolapple.baseadapter
     api develop.bingoogolapple.flowlayout
-    api develop.bingoogolapple.qrcode_core
+//    api develop.bingoogolapple.qrcode_core
     //侧滑返回
     api develop.swipebacklayout
     api develop.opensdk

@@ -4,10 +4,12 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.os.Vibrator;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
+
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import com.common.base.qrcode.core.BarcodeType;
 import com.common.base.qrcode.core.QRCodeView;
@@ -204,8 +206,8 @@ public class ZBarActivity extends AppCompatActivity implements QRCodeView.Delega
         mZBarView.showScanRect();
 
         if (resultCode == Activity.RESULT_OK && requestCode == REQUEST_CODE_CHOOSE_QRCODE_FROM_GALLERY) {
-            String picturePath = BGAPhotoPickerActivity.getSelectedPhotos(data).get(0);
-            mZBarView.decodeQRCode(picturePath);
+            List<String> selectedPhotos = BGAPhotoPickerActivity.getSelectedPhotos(data);
+            mZBarView.decodeQRCode(selectedPhotos.get(0));
         }
     }
 

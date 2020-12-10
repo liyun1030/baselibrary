@@ -3,12 +3,12 @@ package com.common.base.activity;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.support.annotation.NonNull;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Toast;
+import android.widget.Toolbar;
+
+import androidx.core.content.ContextCompat;
 
 import com.common.base.R;
 import com.common.base.tool.AtyContainer;
@@ -186,7 +186,7 @@ public abstract class BaseActivity extends SwipeBackActivity implements EasyPerm
      * @param perms       申请的权限的名字
      */
     @Override
-    public void onPermissionsGranted(int requestCode, @NonNull List<String> perms) {
+    public void onPermissionsGranted(int requestCode,  List<String> perms) {
         Log.i("EasyPermissions", "获取成功的权限$perms");
     }
 
@@ -196,7 +196,7 @@ public abstract class BaseActivity extends SwipeBackActivity implements EasyPerm
      * @param perms       申请的权限的名字
      */
     @Override
-    public void onPermissionsDenied(int requestCode, @NonNull List<String> perms) {
+    public void onPermissionsDenied(int requestCode,  List<String> perms) {
         //处理权限名字字符串
         StringBuffer sb = new StringBuffer();
         for (String str : perms) {
@@ -224,7 +224,7 @@ public abstract class BaseActivity extends SwipeBackActivity implements EasyPerm
      * @param grantResults 授权结果
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode,  String[] permissions,  int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }

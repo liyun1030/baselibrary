@@ -15,8 +15,6 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
-import android.support.v7.widget.LinearSmoothScroller;
-import android.support.v7.widget.RecyclerView;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -31,6 +29,9 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.PopupWindow;
 import android.widget.Toast;
+
+import androidx.recyclerview.widget.LinearSmoothScroller;
+import androidx.recyclerview.widget.RecyclerView;
 
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
@@ -1038,27 +1039,27 @@ public class CommUtils {
 
     /**
      * 取出网络请求url中非法字符
+     *
      * @param input
      * @param charset
      * @return
      * @throws UnsupportedEncodingException
      */
-    public static String NetUrlEncoding( String input, String charset ) throws UnsupportedEncodingException {
+    public static String NetUrlEncoding(String input, String charset) throws UnsupportedEncodingException {
         byte[] bytes = input.getBytes(charset);
         StringBuilder sb = new StringBuilder(bytes.length);
-        for( int i = 0; i < bytes.length; ++i ) {
+        for (int i = 0; i < bytes.length; ++i) {
             int cp = bytes[i] < 0 ? bytes[i] + 256 : bytes[i];
-            if( cp <= 0x20 || cp >= 0x7F || (
+            if (cp <= 0x20 || cp >= 0x7F || (
                     cp == 0x22 || cp == 0x25 || cp == 0x3C ||
                             cp == 0x3E || cp == 0x20 || cp == 0x5B ||
                             cp == 0x5C || cp == 0x5D || cp == 0x5E ||
                             cp == 0x60 || cp == 0x7b || cp == 0x7c ||
                             cp == 0x7d
             )) {
-                sb.append( String.format( "%%%02X", cp ) );
-            }
-            else {
-                sb.append( (char)cp );
+                sb.append(String.format("%%%02X", cp));
+            } else {
+                sb.append((char) cp);
             }
         }
         return sb.toString();
@@ -1067,30 +1068,30 @@ public class CommUtils {
     /**
      * 取出网络请求url的后缀
      */
-    public static String getUrlSuffix( String url ) {
-        String tempsuffix=null;
-        if (url.endsWith(".html")){
-            tempsuffix=".html";
-        }else if (url.endsWith(".jpg")){
-            tempsuffix=".jpg";
-        } else if (url.endsWith(".png")){
-            tempsuffix=".png";
-        }else if (url.endsWith(".pdf")){
-            tempsuffix=".pdf";
-        }else if (url.endsWith(".txt")){
-            tempsuffix=".txt";
-        }else if (url.endsWith(".doc")){
-            tempsuffix=".doc";
-        } else if (url.endsWith(".docx")){
-            tempsuffix=".docx";
-        } else if (url.endsWith(".xls")){
-            tempsuffix=".xls";
-        } else if (url.endsWith(".xlsx")){
-            tempsuffix=".xlsx";
-        } else if (url.endsWith(".ppt")){
-            tempsuffix=".ppt";
-        } else if (url.endsWith(".pptx")){
-            tempsuffix="pptx";
+    public static String getUrlSuffix(String url) {
+        String tempsuffix = null;
+        if (url.endsWith(".html")) {
+            tempsuffix = ".html";
+        } else if (url.endsWith(".jpg")) {
+            tempsuffix = ".jpg";
+        } else if (url.endsWith(".png")) {
+            tempsuffix = ".png";
+        } else if (url.endsWith(".pdf")) {
+            tempsuffix = ".pdf";
+        } else if (url.endsWith(".txt")) {
+            tempsuffix = ".txt";
+        } else if (url.endsWith(".doc")) {
+            tempsuffix = ".doc";
+        } else if (url.endsWith(".docx")) {
+            tempsuffix = ".docx";
+        } else if (url.endsWith(".xls")) {
+            tempsuffix = ".xls";
+        } else if (url.endsWith(".xlsx")) {
+            tempsuffix = ".xlsx";
+        } else if (url.endsWith(".ppt")) {
+            tempsuffix = ".ppt";
+        } else if (url.endsWith(".pptx")) {
+            tempsuffix = "pptx";
         }
 
         return tempsuffix;

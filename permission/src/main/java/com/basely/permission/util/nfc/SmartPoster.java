@@ -11,7 +11,8 @@ import android.annotation.SuppressLint;
 import android.nfc.FormatException;
 import android.nfc.NdefMessage;
 import android.nfc.NdefRecord;
-import android.support.v4.util.Preconditions;
+
+import androidx.core.util.Preconditions;
 
 /**
  * A representation of an NFC Forum "Smart Poster".

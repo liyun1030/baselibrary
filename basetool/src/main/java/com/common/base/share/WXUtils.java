@@ -10,7 +10,7 @@ import android.graphics.Paint;
 
 import com.common.base.R;
 import com.common.base.tool.CommUtils;
-import com.common.base.tool.Util;
+import com.common.base.tool.ImageUtils;
 import com.tencent.mm.opensdk.modelmsg.*;
 import com.tencent.mm.opensdk.openapi.IWXAPI;
 import com.tencent.mm.opensdk.openapi.IWXAPIEventHandler;
@@ -194,7 +194,7 @@ public class WXUtils {
 
         Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, THUMB_SIZE, THUMB_SIZE, true);
         bmp.recycle();
-        msg.thumbData = Util.bmpToByteArray(thumbBmp, true);  // 设置缩略图
+        msg.thumbData = ImageUtils.bmpToByteArray(thumbBmp, true);  // 设置缩略图
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = buildTransaction("img");
@@ -222,7 +222,7 @@ public class WXUtils {
         Bitmap bmp = BitmapFactory.decodeFile(path);
         Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, bmp.getWidth() / 3, bmp.getHeight() / 3, true);
         bmp.recycle();
-        msg.thumbData = Util.bmpToByteArray(thumbBmp, true);
+        msg.thumbData = ImageUtils.bmpToByteArray(thumbBmp, true);
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = buildTransaction(transaction);
@@ -251,7 +251,7 @@ public class WXUtils {
         Bitmap bmp = BitmapFactory.decodeFile(path);
         Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, bmp.getWidth() / 3, bmp.getHeight() / 3, true);
         bmp.recycle();
-        msg.thumbData = Util.bmpToByteArray(thumbBmp, true);
+        msg.thumbData = ImageUtils.bmpToByteArray(thumbBmp, true);
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = buildTransaction(transaction);
@@ -274,7 +274,7 @@ public class WXUtils {
 //        Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, THUMB_SIZE, THUMB_SIZE, true);
         Bitmap thumbBmp = Bitmap.createScaledBitmap(bmp, bmp.getWidth() / 3, bmp.getHeight() / 3, true);
         bmp.recycle();
-        msg.thumbData = Util.bmpToByteArray(thumbBmp, true);
+        msg.thumbData = ImageUtils.bmpToByteArray(thumbBmp, true);
         msg.title = title;
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = buildTransaction("img");
@@ -309,7 +309,7 @@ public class WXUtils {
         msg.mediaObject = music;
         msg.title = title;
         msg.description = description;
-        msg.thumbData = Util.bmpToByteArray(thumb, true);
+        msg.thumbData = ImageUtils.bmpToByteArray(thumb, true);
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = buildTransaction("music");
         req.message = msg;
@@ -329,7 +329,7 @@ public class WXUtils {
         msg.title = title;
         msg.description = description;
 
-        msg.thumbData = Util.bmpToByteArray(thumb, true);
+        msg.thumbData = ImageUtils.bmpToByteArray(thumb, true);
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = buildTransaction("music");
@@ -348,7 +348,7 @@ public class WXUtils {
         WXMediaMessage msg = new WXMediaMessage(video);
         msg.title = title;
         msg.description = description;
-        msg.thumbData = Util.bmpToByteArray(thumb, true);
+        msg.thumbData = ImageUtils.bmpToByteArray(thumb, true);
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = buildTransaction("video");
@@ -367,7 +367,7 @@ public class WXUtils {
         WXMediaMessage msg = new WXMediaMessage(video);
         msg.title = title;
         msg.description = description;
-        msg.thumbData = Util.bmpToByteArray(thumb, true);
+        msg.thumbData = ImageUtils.bmpToByteArray(thumb, true);
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = buildTransaction("video");
@@ -385,7 +385,7 @@ public class WXUtils {
         WXMediaMessage msg = new WXMediaMessage(webpage);
         msg.title = title;  //"治趣在线虚拟诊疗平台"
         msg.description = description;  // "互联网医疗教学的全新尝试 通过计算机模拟医学诊疗环境，逼真还原病例处治全程，在生动趣味的益智交互过程中，掌握医学常识，积累临床思维，孕育全科医生"
-        msg.thumbData = Util.bmpToByteArray(thumb, true);
+        msg.thumbData = ImageUtils.bmpToByteArray(thumb, true);
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = buildTransaction(transaction);
@@ -403,7 +403,7 @@ public class WXUtils {
         appdata.extInfo = ext_info;
 
         final WXMediaMessage msg = new WXMediaMessage();
-        msg.setThumbImage(Util.extractThumbNail(local_path, 150, 150, true));
+        msg.setThumbImage(ImageUtils.extractThumbNail(local_path, 150, 150, true));
         msg.title = title;
         msg.description = description;
         msg.mediaObject = appdata;
@@ -420,11 +420,11 @@ public class WXUtils {
      */
     public void sendAppBinaryData(String local_path, String title, String description, String ext_info) {
         WXAppExtendObject appdata = new WXAppExtendObject();
-        appdata.fileData = Util.readFromFile(local_path, 0, -1);
+        appdata.fileData = ImageUtils.readFromFile(local_path, 0, -1);
         appdata.extInfo = ext_info;
 
         WXMediaMessage msg = new WXMediaMessage();
-        msg.setThumbImage(Util.extractThumbNail(local_path, 150, 150, true));
+        msg.setThumbImage(ImageUtils.extractThumbNail(local_path, 150, 150, true));
         msg.title = title;
         msg.description = description;
         msg.mediaObject = appdata;
@@ -464,7 +464,7 @@ public class WXUtils {
         WXMediaMessage msg = new WXMediaMessage(emoji);
         msg.title = title;
         msg.description = description;
-        msg.thumbData = Util.readFromFile(thumb_path, 0, (int) new File(thumb_path).length());
+        msg.thumbData = ImageUtils.readFromFile(thumb_path, 0, (int) new File(thumb_path).length());
 
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
@@ -479,12 +479,12 @@ public class WXUtils {
      */
     public void sendEmojiBinaryData(String title, String description, String emoji_path, String thumb_path) {
         WXEmojiObject emoji = new WXEmojiObject();
-        emoji.emojiData = Util.readFromFile(emoji_path, 0, (int) new File(emoji_path).length());
+        emoji.emojiData = ImageUtils.readFromFile(emoji_path, 0, (int) new File(emoji_path).length());
         WXMediaMessage msg = new WXMediaMessage(emoji);
 
         msg.title = title;
         msg.description = description;
-        msg.thumbData = Util.readFromFile(thumb_path, 0, (int) new File(thumb_path).length());
+        msg.thumbData = ImageUtils.readFromFile(thumb_path, 0, (int) new File(thumb_path).length());
 
         SendMessageToWX.Req req = new SendMessageToWX.Req();
         req.transaction = buildTransaction("emoji");

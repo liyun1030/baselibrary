@@ -172,6 +172,7 @@ android {
         main.jniLibs.srcDirs = ['libs']
     }
     packagingOptions {
+        exclude 'META-INF/proguard/androidx-annotations.pro'
         exclude 'META-INF/proguard/coroutines.pro'
     }
     lintOptions {
@@ -206,8 +207,8 @@ dependencies {
     api develop.rxjava.rxandroid
     api develop.retrofit2.retrofit
     api develop.permissions.easypermission
+    api develop.androidx_appcompat
     api develop.kotlin_coroutines.kotlinx_coroutines_android
     api develop.kotlin_coroutines.kotlinx_coroutines_core
     implementation project(':basetool')
-
 }

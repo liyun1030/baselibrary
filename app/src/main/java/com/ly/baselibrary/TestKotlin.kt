@@ -1,7 +1,7 @@
 package com.ly.baselibrary
 
 import android.os.Build
-import android.support.annotation.RequiresApi
+import androidx.annotation.RequiresApi
 import com.common.base.bean.BaseModel
 import com.common.base.bean.ServerModel
 import kotlinx.coroutines.*

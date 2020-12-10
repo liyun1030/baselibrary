@@ -2,6 +2,7 @@ package com.common.base.zxing;
 
 import android.graphics.Bitmap;
 
+import com.common.base.qrcode.core.BGAQRCodeUtil;
 import com.google.zxing.BarcodeFormat;
 import com.google.zxing.BinaryBitmap;
 import com.google.zxing.DecodeHintType;
@@ -17,7 +18,6 @@ import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
-import cn.bingoogolapple.qrcode.core.BGAQRCodeUtil;
 
 /**
  * 作者:王浩 邮件:bingoogolapple@gmail.com

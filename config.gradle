@@ -45,6 +45,7 @@ ext {
                 multidex_version          : "1.0.3",
                 kotlinx_coroutines_android: "1.3.7",
                 kotlinx_coroutines_core   : "1.3.7",
+                androidx_appcompat        : "1.2.0",
                 min_sdk                   : 21,
                 target_sdk                : 28]
 }
@@ -92,6 +93,7 @@ develop.bingoogolapple = [photopicker: "cn.bingoogolapple:bga-photopicker:$versi
 
 develop.fastjson = "com.alibaba:fastjson:$versions.fastjson"
 
+develop.androidx_appcompat = "androidx.appcompat:appcompat:$versions.androidx_appcompat"
 develop.multitype = "me.drakeet.multitype:multitype:$versions.multitype"
 
 develop.guava = "com.google.guava:guava:$versions.guava"
@@ -107,7 +109,6 @@ develop.kotlin_coroutines = [kotlinx_coroutines_android: "org.jetbrains.kotlinx:
 develop.activityLauncher = "com.github.bbssyyuui:ActivityLauncher:$versions.activityLauncher"
 
 develop.xrecyclerview = "com.jcodecraeer:xrecyclerview:$versions.xrecyclerview"
-
 develop.readystatesoftware = [readystatesoftware     : "com.readystatesoftware.chuck:library:$versions.readystatesoftware",
                               readystatesoftware_noop: "com.readystatesoftware.chuck:library-no-op:$versions.readystatesoftware"]
 
