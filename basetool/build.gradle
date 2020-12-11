@@ -110,9 +110,10 @@ dependencies {
 
     //必须使用
     api develop.ok_http.okgo
-
     api develop.ok_http.okserver
-
+    api develop.ok_http.okhttp3
+    api develop.ok_http.logging_interceptor
+    api develop.ok_http.urlconnection
     //导入RxJava 和 RxAndroid
     api develop.rxjava.rxjava2
     api develop.rxjava.rxandroid
@@ -135,6 +136,9 @@ dependencies {
     api files('libs/mta-sdk-1.6.2.jar')
     api files('libs/weibosdkcore_release.jar')
 
+    api develop.gallery_final
+    api develop.universal_image_loader
+    api develop.stetho
     api develop.support.support_v4
     api develop.google_zxing
     api develop.bingoogolapple.photopicker

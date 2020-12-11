@@ -9,7 +9,7 @@ import java.util.List;
  * 本类的作用:基类常量
  */
 public class BaseConstant {
-    public static  String SP_NAME="curefun_doctor";//常量名称-外界传入
+    public static  String SP_NAME=".common_sp";//常量名称-外界传入
     public static List<EmoBean> emoBeans;
     public static final String CACHE_DIR = "curefun_doctor/";
     public static final int CLICK_CHECK = 200;//点击事件间隔

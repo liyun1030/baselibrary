@@ -263,7 +263,6 @@ public class TokenInterceptor implements Interceptor {
         String sign = MD5(signStr);
         String resultUrl = "";
         resultUrl += ipPortStr;
-//        resultUrl += "/cfgateway";
         resultUrl += intefaceStr;
         resultUrl += String.format("?sign=%s", sign);
         resultUrl += String.format("&device_type=%d", 1);    //1代表终端

@@ -38,7 +38,6 @@ import java.util.Map;
 import okhttp3.Cookie;
 import okhttp3.HttpUrl;
 
-//import com.common.base.callback.StringDialogCallback;
 
 /**
  * created by 李云 on 2018/12/27

@@ -2,18 +2,19 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ly.baselibrary">
+
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
         android:allowBackup="true"
+        android:appComponentFactory="whateverString"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        tools:replace="android:appComponentFactory"
-        android:appComponentFactory="whateverString"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:replace="android:appComponentFactory">
         <activity android:name="com.ly.baselibrary.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,25 +28,28 @@
         <activity
             android:name="com.ly.baselibrary.ZxingGeneratectivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name=".NetworkActivity"
+            android:screenOrientation="portrait" />
         <!-- gradle配置参数 -->
-<!--        <meta-data-->
-<!--            android:name="BASE_URL"-->
-<!--            android:value="${BASE_URL}" />-->
-<!--        <meta-data-->
-<!--            android:name="BASE_SHARE_URL"-->
-<!--            android:value="${BASE_SHARE_URL}" />-->
-<!--        <meta-data-->
-<!--            android:name="CUR_ENV"-->
-<!--            android:value="${CUR_ENV}" />-->
-<!--        <meta-data-->
-<!--            android:name="VERSION_NAME"-->
-<!--            android:value="${VERSION_NAME}" />-->
-<!--        <meta-data-->
-<!--            android:name="VERSION_CODE"-->
-<!--            android:value="${VERSION_CODE}" />-->
-<!--        <meta-data-->
-<!--            android:name="PIC_HOST"-->
-<!--            android:value="${PIC_HOST}" />-->
+        <!--        <meta-data-->
+        <!--            android:name="BASE_URL"-->
+        <!--            android:value="${BASE_URL}" />-->
+        <!--        <meta-data-->
+        <!--            android:name="BASE_SHARE_URL"-->
+        <!--            android:value="${BASE_SHARE_URL}" />-->
+        <!--        <meta-data-->
+        <!--            android:name="CUR_ENV"-->
+        <!--            android:value="${CUR_ENV}" />-->
+        <!--        <meta-data-->
+        <!--            android:name="VERSION_NAME"-->
+        <!--            android:value="${VERSION_NAME}" />-->
+        <!--        <meta-data-->
+        <!--            android:name="VERSION_CODE"-->
+        <!--            android:value="${VERSION_CODE}" />-->
+        <!--        <meta-data-->
+        <!--            android:name="PIC_HOST"-->
+        <!--            android:value="${PIC_HOST}" />-->
     </application>
 
 </manifest>
