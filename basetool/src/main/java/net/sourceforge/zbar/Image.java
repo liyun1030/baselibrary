@@ -23,7 +23,7 @@
  *  http://sourceforge.net/projects/zbar
  *------------------------------------------------------------------------*/
 
-package com.common.base.zbar;
+package net.sourceforge.zbar;
 
 /** stores image data samples along with associated format and size
  * metadata.

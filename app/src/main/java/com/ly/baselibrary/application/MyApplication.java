@@ -9,6 +9,7 @@ import android.os.StrictMode;
 
 import androidx.core.content.ContextCompat;
 
+import com.common.base.BuildConfig;
 import com.common.base.application.BaseApplication;
 import com.common.base.network.ACache;
 import com.common.base.network.TokenInterceptor;
@@ -20,10 +21,14 @@ import com.common.base.tool.BaseConstant;
 import com.common.base.tool.CommUtils;
 import com.facebook.stetho.Stetho;
 import com.facebook.stetho.okhttp3.StethoInterceptor;
+import com.ly.baselibrary.R;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.https.HttpsUtils;
 import com.lzy.okgo.model.HttpHeaders;
+import com.nostra13.universalimageloader.core.DisplayImageOptions;
+import com.nostra13.universalimageloader.core.assist.ImageSize;
+import com.nostra13.universalimageloader.core.imageaware.ImageViewAware;
 
 import java.io.File;
 import java.security.cert.CertificateException;
@@ -42,9 +47,6 @@ import cn.finalteam.galleryfinal.widget.GFImageView;
 import cn.finalteam.toolsfinal.StorageUtils;
 import okhttp3.OkHttpClient;
 
-/**
- * Created by Yan Kai on 2015/12/18
- */
 public class MyApplication extends BaseApplication {
 
     private static MyApplication instance = null;

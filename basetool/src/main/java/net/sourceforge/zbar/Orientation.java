@@ -23,7 +23,7 @@
  *  http://sourceforge.net/projects/zbar
  *------------------------------------------------------------------------*/
 
-package com.common.base.zbar;
+package net.sourceforge.zbar;
 
 /** Decoded symbol coarse orientation.
  */

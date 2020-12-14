@@ -1,5 +1,5 @@
 /*------------------------------------------------------------------------
- *  Modifier
+ *  Config
  *
  *  Copyright 2010 (c) Jeff Brown <spadix@users.sourceforge.net>
  *
@@ -23,20 +23,34 @@
  *  http://sourceforge.net/projects/zbar
  *------------------------------------------------------------------------*/
 
-package com.common.base.zbar;
+package net.sourceforge.zbar;
 
-/** Decoder symbology modifiers.
+/** Decoder configuration options.
  */
-public class Modifier
+public class Config
 {
-    /** barcode tagged as GS1 (EAN.UCC) reserved
-     * (eg, FNC1 before first data character).
-     * data may be parsed as a sequence of GS1 AIs
-     */
-    public static final int GS1 = 0;
+    /** Enable symbology/feature. */
+    public static final int ENABLE = 0;
+    /** Enable check digit when optional. */
+    public static final int ADD_CHECK = 1;
+    /** Return check digit when present. */
+    public static final int EMIT_CHECK = 2;
+    /** Enable full ASCII character set. */
+    public static final int ASCII = 3;
 
-    /** barcode tagged as AIM reserved
-     * (eg, FNC1 after first character or digit pair)
-     */
-    public static final int AIM = 1;
+    /** Minimum data length for valid decode. */
+    public static final int MIN_LEN = 0x20;
+    /** Maximum data length for valid decode. */
+    public static final int MAX_LEN = 0x21;
+
+    /** Required video consistency frames. */
+    public static final int UNCERTAINTY = 0x40;
+
+    /** Enable scanner to collect position data. */
+    public static final int POSITION = 0x80;
+
+    /** Image scanner vertical scan density. */
+    public static final int X_DENSITY = 0x100;
+    /** Image scanner horizontal scan density. */
+    public static final int Y_DENSITY = 0x101;
 }

@@ -3,7 +3,7 @@ package com.common.base.network.config;
 import android.os.Build;
 import android.text.TextUtils;
 
-import com.common.base.R;
+import com.common.base.BuildConfig;
 
 import java.net.CookieHandler;
 import java.net.CookieManager;

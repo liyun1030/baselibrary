@@ -10,6 +10,11 @@ import com.common.base.qrcode.core.BarcodeType;
 import com.common.base.qrcode.core.QRCodeView;
 import com.common.base.qrcode.core.ScanResult;
 
+import net.sourceforge.zbar.Config;
+import net.sourceforge.zbar.Image;
+import net.sourceforge.zbar.ImageScanner;
+import net.sourceforge.zbar.Symbol;
+
 import java.nio.charset.StandardCharsets;
 import java.util.Collection;
 import java.util.Collections;

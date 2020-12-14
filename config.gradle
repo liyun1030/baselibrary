@@ -17,8 +17,8 @@ ext {
                 okserver                  : "2.0.5",
                 easypermission            : "1.0.1",
                 hipermission              : "1.0.7",
-                photopicker               : "1.2.8@aar",
-                baseadapter               : "1.2.9@aar",
+                photopicker               : "2.0.2@aar",
+                baseadapter               : "2.0.0@aar",
                 flowlayout                : "1.0.0@aar",
                 guava                     : "25.1-android",
                 rxbus                     : "2.0.0",
@@ -38,7 +38,7 @@ ext {
                 opensdk                   : "+",
                 zxing                     : "1.3.7",
                 google_zxing              : "3.3.3",
-                stetho:"1.5.0",
+                stetho                    : "1.5.0",
                 build_tools               : "28.0.3",
                 kotlin_version            : "1.3.72",
                 multitype                 : "2.2.1",
@@ -102,8 +102,7 @@ develop.multitype = "me.drakeet.multitype:multitype:$versions.multitype"
 develop.guava = "com.google.guava:guava:$versions.guava"
 
 develop.gallery_final = "cn.finalteam:galleryfinal:$versions.gallery_final"
-
-develop.universal_image_loader="com.nostra13.universalimageloader:$versions.universal_image_loader"
+develop.universal_image_loader="com.nostra13.universalimageloader:universal-image-loader:$versions.universal_image_loader"
 
 develop.rxbus = "com.hwangjr.rxbus:rxbus:$versions.rxbus"
 

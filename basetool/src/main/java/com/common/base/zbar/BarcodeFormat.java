@@ -1,5 +1,7 @@
 package com.common.base.zbar;
 
+import net.sourceforge.zbar.Symbol;
+
 import java.util.ArrayList;
 import java.util.List;
 

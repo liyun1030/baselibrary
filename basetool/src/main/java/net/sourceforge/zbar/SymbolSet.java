@@ -23,7 +23,7 @@
  *  http://sourceforge.net/projects/zbar
  *------------------------------------------------------------------------*/
 
-package com.common.base.zbar;
+package net.sourceforge.zbar;
 
 /** Immutable container for decoded result symbols associated with an image
  * or a composite symbol.

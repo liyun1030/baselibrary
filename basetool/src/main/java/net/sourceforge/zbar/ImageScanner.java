@@ -23,7 +23,7 @@
  *  http://sourceforge.net/projects/zbar
  *------------------------------------------------------------------------*/
 
-package com.common.base.zbar;
+package net.sourceforge.zbar;
 
 /** Read barcodes from 2-D images.
  */

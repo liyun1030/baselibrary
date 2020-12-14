@@ -65,6 +65,7 @@ android {
         sourceSets {
             main {
                 jni.srcDirs = []
+                jniLibs.srcDirs = ['libs']
             }
         }
         delete(file('.externalNativeBuild'), file('src/main/libs'), file('src/main/obj'))
@@ -137,14 +138,15 @@ dependencies {
     api files('libs/weibosdkcore_release.jar')
 
     api develop.gallery_final
-    api develop.universal_image_loader
     api develop.stetho
     api develop.support.support_v4
     api develop.google_zxing
     api develop.bingoogolapple.photopicker
     api develop.bingoogolapple.baseadapter
     api develop.bingoogolapple.flowlayout
-//    api develop.bingoogolapple.qrcode_core
+    api develop.universal_image_loader
+    api develop.bingoogolapple.qrcode_core
+    api develop.androidx_appcompat
     //侧滑返回
     api develop.swipebacklayout
     api develop.opensdk
