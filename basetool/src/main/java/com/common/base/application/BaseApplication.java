@@ -1,18 +1,25 @@
 package com.common.base.application;
 
+import android.content.Context;
+import android.content.IntentFilter;
+import android.net.ConnectivityManager;
 import android.os.Build;
 import android.os.StrictMode;
 
 import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
+import com.common.base.BuildConfig;
 import com.common.base.network.TokenInterceptor;
+import com.common.base.receiver.NetworkReceiver;
 import com.common.base.tool.SharedPreferencesUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
 import com.lzy.okgo.https.HttpsUtils;
 import com.lzy.okgo.interceptor.HttpLoggingInterceptor;
 import com.lzy.okgo.model.HttpHeaders;
+import com.squareup.leakcanary.LeakCanary;
+import com.squareup.leakcanary.RefWatcher;
 
 import java.security.cert.CertificateException;
 import java.security.cert.X509Certificate;
@@ -23,6 +30,7 @@ import javax.net.ssl.HostnameVerifier;
 import javax.net.ssl.SSLSession;
 import javax.net.ssl.X509TrustManager;
 
+import cn.jpush.android.api.JPushInterface;
 import okhttp3.OkHttpClient;
 
 
@@ -34,9 +42,17 @@ public abstract class BaseApplication extends MultiDexApplication {
     protected static BaseApplication application;
     protected static SharedPreferencesUtils spInstance;
     public static boolean isDebug = true;
-
     public abstract String getSpName();
+    private boolean hasNetwork = true;
+    private RefWatcher refWatcher;
+    private NetworkReceiver receiver;
+    public boolean isHasNetwork() {
+        return hasNetwork;
+    }
 
+    public void setHasNetwork(boolean hasNetwork) {
+        this.hasNetwork = hasNetwork;
+    }
     @Override
     public void onCreate() {
         super.onCreate();
@@ -54,8 +70,33 @@ public abstract class BaseApplication extends MultiDexApplication {
         init();
         initOkGo();
         initUmeng();
+        initJpush();
+        if(BuildConfig.DEBUG) {
+            refWatcher = LeakCanary.install(this);
+        }
+        initNetworkReceiver();
     }
 
+    private void initNetworkReceiver() {
+        receiver = new NetworkReceiver();
+        IntentFilter mFilter = new IntentFilter();
+        mFilter.addAction(ConnectivityManager.CONNECTIVITY_ACTION);
+        registerReceiver(receiver, mFilter);
+    }
+    @Override
+    public void onTerminate() {
+        unregisterReceiver(receiver);
+        super.onTerminate();
+    }
+    private void initJpush() {
+        JPushInterface.setDebugMode(true);    // 设置开启日志,发布时请关闭日志
+        JPushInterface.init(this);            // 初始化 JPush
+        String registrationID = JPushInterface.getRegistrationID(this);
+    }
+    public static RefWatcher getRefWatcher(Context context){
+        BaseApplication application = (BaseApplication)context.getApplicationContext();
+        return application.refWatcher;
+    }
     private void ARouterInit() {
     }
 

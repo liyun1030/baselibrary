@@ -3,14 +3,14 @@ package com.common.base.network;
 import android.content.Context;
 
 import com.alibaba.fastjson.JSON;
-import com.common.base.bean.BaseBean;
-import com.common.base.bean.BaseModel;
 import com.common.base.bean.StudentHomeRoleModel;
 import com.common.base.bean.ThirdLoginByResModel;
 import com.common.base.bean.UserLoginReModel;
+import com.common.base.okgo.OkgoUtil;
+import com.common.base.tool.BaseConstant;
 import com.common.base.tool.JsonUtils;
 import com.common.base.tool.MapUtils;
-import com.common.base.tool.OkgoUtil;
+import com.common.base.tool.OkHttpResultCallback;
 
 import java.util.Map;
 
@@ -80,6 +80,38 @@ public class CommonBusiness {
                     }
                 }
             });
+        }
+    }
+
+    /**
+     * 用户所有操作
+     */
+    public void userOperationHttp(Context ctx, UserLoginReModel reqModel, String url, int method) {
+        Map maps = null;
+        if (reqModel != null) {
+            maps = MapUtils.objectToMap(reqModel);
+        }
+        OkHttpUtil util=new OkHttpUtil(ctx, new BaseConstant());
+        OkHttpUtil.ResponseListener listener= new  OkHttpUtil.ResponseListener(){
+            @Override
+            public void success(int flag, String response) {
+
+            }
+
+            @Override
+            public void failure(int flag, String errorResponse) {
+
+            }
+        };
+        util.setListener(listener);
+        util.setResultCallback(new OkHttpResultCallback(listener));
+        if (method == 1) {
+            //get请求
+            util.get(BaseConstant.LOGIN_LOGIN_BY_ACCOUNT, BaseConstant.LOGIN_LOGIN_BY_ACCOUNT, null);
+        } else if (method == 2) {
+            //post
+
+            util.post(BaseConstant.LOGIN_LOGIN_BY_ACCOUNT, reqModel);
         }
     }
 }

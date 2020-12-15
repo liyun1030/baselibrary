@@ -19,4 +19,8 @@
         android:id="@+id/test_scan_barcode"
         style="@style/MatchWrapTv"
         android:text="zbar测试扫描二维码"/>
+    <TextView
+        android:id="@+id/test_network"
+        style="@style/MatchWrapTv"
+        android:text="网络请求"/>
 </LinearLayout>

@@ -40,6 +40,9 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
             case R.id.test_scan_barcode:
                 startActivity(new Intent(this, ZBarActivity.class));
                 break;
+            case R.id.test_network:
+                startActivity(new Intent(this, NetworkActivity.class));
+                break;
         }
     }
 

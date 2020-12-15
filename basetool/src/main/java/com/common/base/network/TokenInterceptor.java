@@ -45,7 +45,9 @@ public class TokenInterceptor implements Interceptor {
     public static final String SP_NAME = "sp_token";
     private static TokenInterceptor sInstance;
     private static Context context;
-
+    public static final String ORG_ID = "url_o_id";
+    public static final String H_ID = "url_h_id";
+    public static final String R_ID = "url_r_id";
     private TokenInterceptor(Context context) {
         this.context = context;
     }
@@ -243,6 +245,13 @@ public class TokenInterceptor implements Interceptor {
         }
         return sRequestToken;
     }
+    public static String getsRequestOrgId() {
+        return SharedPreferencesUtils.getInstance(context, SP_NAME).getString(ORG_ID, "");
+    }
+
+    public static String getsRequestHid() {
+        return SharedPreferencesUtils.getInstance(context, SP_NAME).getString(H_ID, "");
+    }
     public static String withToken(String srcUrl) {
         int spliteIndex = srcUrl.indexOf("/", 9);
         int lastSpliteIndex = srcUrl.lastIndexOf("?") == -1 ? srcUrl.length() : srcUrl.lastIndexOf("?");
@@ -268,13 +277,13 @@ public class TokenInterceptor implements Interceptor {
         resultUrl += String.format("&device_type=%d", 1);    //1代表终端
         resultUrl += String.format("&t=%d", t);
         resultUrl += String.format("&token=%s", getsRequestToken());
-        resultUrl += String.format("&uid=%s", getUid());
+        resultUrl += String.format("&url_o_id=%s", getsRequestOrgId());
+        resultUrl += String.format("&url_h_id=%s", getsRequestHid());
         if (!TextUtils.isEmpty(paramStr)) {
             resultUrl += paramStr.replace("?", "&");
         }
         return resultUrl;
     }
-
     public final static String MD5(String s) {
         char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'a', 'b', 'c', 'd', 'e', 'f'};
         try {

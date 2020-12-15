@@ -1,4 +1,4 @@
-package com.common.base.tool;
+package com.common.base.okgo;
 
 import android.app.Activity;
 import android.content.Context;
@@ -8,6 +8,8 @@ import android.view.View;
 import com.common.base.bean.BaseBean;
 import com.common.base.callback.DialogCallback;
 import com.common.base.callback.StringDialogCallback;
+import com.common.base.tool.CommUtils;
+import com.common.base.tool.JsonUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.adapter.Call;
 import com.lzy.okgo.cache.CacheEntity;
@@ -177,9 +179,8 @@ public class OkgoUtil {
 //        if (params != null) {
 //            postRequest.params(params);
 //        }
-//        JSONObject json = new JSONObject(params);
-        postRequest.params(params);
-//        postRequest.upJson(json);
+        JSONObject json = new JSONObject(params);
+        postRequest.upJson(json);
 //        postRequest.isMultipart(false);
 //        postRequest.params("Content-Type", "application/x-www-form-urlencoded; charset=utf-8");
         postRequest.execute(new DialogCallback<BaseBean>(ctx) {

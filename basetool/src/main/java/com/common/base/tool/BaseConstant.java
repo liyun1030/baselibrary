@@ -2,7 +2,9 @@ package com.common.base.tool;
 
 import com.common.base.view.emoji.EmoBean;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * created by 李云 on 2018/12/27
@@ -27,9 +29,22 @@ public class BaseConstant {
     public static final String NEWS="4";//新闻
 
     public static final String DOCUMENT="5";//文档
-    //-------------------banner跳转类型--------------------------------------
-
-
+    /**
+     * 获取类型标记.
+     *
+     * @param type
+     * @return
+     */
+    protected static Map<String, Integer> flagMap = new HashMap<>();
+    public static String LOGIN_LOGIN_BY_ACCOUNT = "http://192.168.1.222/szhiqu/uapi/login/loginByPsw";
+    public static int LOGIN_LOGIN_BY_ACCOUNT_FLAG=1;
+    public Integer getFlag(String type) {
+        return flagMap.get(type);
+    }
+    public static final int GET_OVERVIEW_STARNDARD_TRAIN_EXAM_FLAG = 715;
+    static {
+        flagMap.put(LOGIN_LOGIN_BY_ACCOUNT, LOGIN_LOGIN_BY_ACCOUNT_FLAG);
+    }
 
 
 }

@@ -1,4 +1,4 @@
-package com.common.base.tool;
+package com.common.base.okgo;
 
 import com.common.base.bean.ImageItem;
 import com.lzy.okgo.OkGo;

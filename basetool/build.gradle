@@ -150,4 +150,10 @@ dependencies {
     //侧滑返回
     api develop.swipebacklayout
     api develop.opensdk
+    debugImplementation develop.leakcanary.leakcanary_android
+    releaseImplementation develop.leakcanary.leakcanary_android_no_op
+    debugImplementation develop.leakcanary.leakcanary_support_fragment
+
+    api develop.jpush.jiguang_jpush
+    api develop.jpush.jiguang_jcore
 }

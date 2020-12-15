@@ -55,4 +55,6 @@
     <string name="pay_exception">购买失败,请重新购买</string>
     <string name="pay_success">购买成功</string>
     <string name="no_data1">暂时没有记录</string>
+
+    <string name="error_network">请检查网络连接</string>
 </resources>

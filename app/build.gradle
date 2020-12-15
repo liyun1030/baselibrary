@@ -32,6 +32,16 @@ android {
                 includeCompileClasspath = true
             }
         }
+        manifestPlaceholders = [BASE_URL            : DEBUG_BASE_URL,
+                                BASE_SHARE_URL      : DEBUG_SHARE_URL,
+                                TENCENT_APPKEY_VALUE: properties.getProperty("tencentAppKey"),
+                                CUR_ENV             : DEBUG_ENV,
+                                VERSION_NAME        : VERSION_NAME,
+                                VERSION_CODE        : VERSION_CODE,
+                                JPUSH_PKGNAME       : applicationId,
+                                JPUSH_APPKEY        : "a07ca15d79f8ffe5eb49ab32", //JPush 上注册的包名对应的 Appkey.
+                                JPUSH_CHANNEL       : "developer-default", //暂时填写默认值即可.
+                                PIC_HOST            : PIC_HOST]
     }
     flavorDimensions "debug", 'dev', "release"
     signingConfigs {
@@ -76,25 +86,16 @@ android {
         debug {
             buildConfigField "boolean", "LOG_DEBUG", "true"
             minifyEnabled false
-            debuggable true
+            shrinkResources false
             zipAlignEnabled true
             signingConfig signingConfigs.debug
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-//            applicationIdSuffix ".debug"
-            manifestPlaceholders = [BASE_URL            : DEBUG_BASE_URL,
-                                    BASE_SHARE_URL      : DEBUG_SHARE_URL,
-                                    TENCENT_APPKEY_VALUE: properties.getProperty("tencentAppKey"),
-                                    CUR_ENV             : DEBUG_ENV,
-                                    VERSION_NAME        : VERSION_NAME,
-                                    VERSION_CODE        : VERSION_CODE,
-                                    PIC_HOST            : PIC_HOST]
             android.applicationVariants.all { variant ->
                 variant.outputs.all {
-                    //outputFileName = APP_NAME + "_" + BUILD_TYPE + "_v" + VERSION_NAME + "_" + getDate() + ".apk"
-                    //gradle新版本无法使用+
                     outputFileName = "${project.name}_${defaultConfig.versionName}_${variant.buildType.name}.apk"
                 }
             }
+
         }
 
         release {
@@ -104,12 +105,6 @@ android {
             debuggable true
             signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            manifestPlaceholders = [BASE_URL      : RELEASE_BASE_URL,
-                                    BASE_SHARE_URL: RELEASE_SHARE_URL,
-                                    CUR_ENV       : RELEASE_ENV,
-                                    VERSION_NAME  : VERSION_NAME,
-                                    VERSION_CODE  : VERSION_CODE,
-                                    PIC_HOST      : PIC_HOST]
             android.applicationVariants.all { variant ->
                 variant.outputs.all {
                     outputFileName = "${project.name}_${defaultConfig.versionName}_${variant.buildType.name}.apk"
@@ -124,12 +119,6 @@ android {
             signingConfig signingConfigs.dev
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
 //            applicationIdSuffix ".dev"
-            manifestPlaceholders = [BASE_URL      : DEV_BASE_URL,
-                                    BASE_SHARE_URL: DEV_SHARE_URL,
-                                    CUR_ENV       : DEV_ENV,
-                                    VERSION_NAME  : VERSION_NAME,
-                                    VERSION_CODE  : VERSION_CODE,
-                                    PIC_HOST      : PIC_HOST]
             android.applicationVariants.all { variant ->
                 variant.outputs.all {
                     outputFileName = "${project.name}_${defaultConfig.versionName}_${variant.buildType.name}.apk"

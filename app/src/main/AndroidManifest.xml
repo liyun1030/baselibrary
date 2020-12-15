@@ -3,16 +3,23 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ly.baselibrary">
 
+<!--    <permission-->
+<!--        android:name="com.ly.baselibrary.permission.JPUSH_MESSAGE"-->
+<!--        android:protectionLevel="signature" />-->
+<!--    <uses-permission android:name="com.ly.baselibrary.permission.JPUSH_MESSAGE" />-->
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
     <application
+        android:name=".application.MyApplication"
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:networkSecurityConfig="@xml/network_config"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
         <activity android:name="com.ly.baselibrary.MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -27,27 +34,53 @@
             android:name="com.ly.baselibrary.ZxingGeneratectivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name=".NetworkActivity"
+            android:name="com.ly.baselibrary.NetworkActivity"
             android:screenOrientation="portrait" />
-        <!-- gradle配置参数 -->
-        <!--        <meta-data-->
-        <!--            android:name="BASE_URL"-->
-        <!--            android:value="${BASE_URL}" />-->
-        <!--        <meta-data-->
-        <!--            android:name="BASE_SHARE_URL"-->
-        <!--            android:value="${BASE_SHARE_URL}" />-->
-        <!--        <meta-data-->
-        <!--            android:name="CUR_ENV"-->
-        <!--            android:value="${CUR_ENV}" />-->
-        <!--        <meta-data-->
-        <!--            android:name="VERSION_NAME"-->
-        <!--            android:value="${VERSION_NAME}" />-->
-        <!--        <meta-data-->
-        <!--            android:name="VERSION_CODE"-->
-        <!--            android:value="${VERSION_CODE}" />-->
-        <!--        <meta-data-->
-        <!--            android:name="PIC_HOST"-->
-        <!--            android:value="${PIC_HOST}" />-->
+
+        <meta-data
+            android:name="BASE_URL"
+            android:value="${BASE_URL}" />
+        <meta-data
+            android:name="BASE_SHARE_URL"
+            android:value="${BASE_SHARE_URL}" />
+        <meta-data
+            android:name="CUR_ENV"
+            android:value="${CUR_ENV}" />
+        <meta-data
+            android:name="VERSION_NAME"
+            android:value="${VERSION_NAME}" />
+        <meta-data
+            android:name="VERSION_CODE"
+            android:value="${VERSION_CODE}" />
+        <meta-data
+            android:name="PIC_HOST"
+            android:value="${PIC_HOST}" />
+        <meta-data
+            android:name="TENCENT_APPKEY_VALUE"
+            android:value="${TENCENT_APPKEY_VALUE}" />
+        <meta-data
+            android:name="JPUSH_PKGNAME"
+            android:value="${JPUSH_PKGNAME}" />
+        <meta-data
+            android:name="JPUSH_APPKEY"
+            android:value="${JPUSH_APPKEY}" />
+        <meta-data
+            android:name="JPUSH_CHANNEL"
+            android:value="${JPUSH_CHANNEL}" />
+        <receiver
+            android:name="com.common.base.receiver.JpushReceiver"
+            android:enabled="true"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="cn.jpush.android.intent.REGISTRATION" />
+                <action android:name="cn.jpush.android.intent.MESSAGE_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_RECEIVED" />
+                <action android:name="cn.jpush.android.intent.NOTIFICATION_OPENED" />
+                <action android:name="cn.jpush.android.intent.CONNECTION" />
+
+                <category android:name="well.curefun.com" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

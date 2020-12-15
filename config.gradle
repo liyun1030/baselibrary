@@ -49,6 +49,9 @@ ext {
                 kotlinx_coroutines_android: "1.3.7",
                 kotlinx_coroutines_core   : "1.3.7",
                 androidx_appcompat        : "1.2.0",
+                leakcanary_android        : "1.6.1",
+                jiguang_jpush             : "3.1.3",
+                jiguang_jcore             : "1.2.1",
                 min_sdk                   : 21,
                 target_sdk                : 28]
 }
@@ -93,7 +96,12 @@ develop.bingoogolapple = [photopicker: "cn.bingoogolapple:bga-photopicker:$versi
                           zxing      : "cn.bingoogolapple:bga-qrcode-zxing:$versions.zxing",
                           zbar       : "cn.bingoogolapple:bga-qrcode-zbar:$versions.zxing",
                           qrcode_core: "cn.bingoogolapple:bga-qrcode-core:$versions.zxing"]
-
+develop.leakcanary = [leakcanary_android         : "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary_android",
+                      leakcanary_android_no_op   : "com.squareup.leakcanary:leakcanary-android-no-op:$versions.leakcanary_android",
+                      leakcanary_support_fragment: "com.squareup.leakcanary:leakcanary-support-fragment:$versions.leakcanary_android"]
+develop.jpush = [jiguang_jpush: "cn.jiguang.sdk:jpush:$versions.jiguang_jpush",
+                 jiguang_jcore: "cn.jiguang.sdk:jcore:$versions.jiguang_jcore"]
+//极光推送
 develop.fastjson = "com.alibaba:fastjson:$versions.fastjson"
 
 develop.androidx_appcompat = "androidx.appcompat:appcompat:$versions.androidx_appcompat"
@@ -102,7 +110,7 @@ develop.multitype = "me.drakeet.multitype:multitype:$versions.multitype"
 develop.guava = "com.google.guava:guava:$versions.guava"
 
 develop.gallery_final = "cn.finalteam:galleryfinal:$versions.gallery_final"
-develop.universal_image_loader="com.nostra13.universalimageloader:universal-image-loader:$versions.universal_image_loader"
+develop.universal_image_loader = "com.nostra13.universalimageloader:universal-image-loader:$versions.universal_image_loader"
 
 develop.rxbus = "com.hwangjr.rxbus:rxbus:$versions.rxbus"
 
@@ -123,7 +131,7 @@ develop.swipebacklayout = "me.imid.swipebacklayout.lib:library:$versions.swipeba
 develop.opensdk = "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:$versions.opensdk"
 
 develop.xedittext = "com.xw.repo:xedittext:$versions.xedittext" //emoji表情过滤
-develop.stetho="com.facebook.stetho:stetho-okhttp3:$versions.stetho"
+develop.stetho = "com.facebook.stetho:stetho-okhttp3:$versions.stetho"
 develop.bubbleseekbar = "com.xw.repo:bubbleseekbar:$versions.bubbleseekbar"
 develop.smarttablayout = "com.ogaclejapan.smarttablayout:library:$versions.smarttablayout"
 

@@ -50,7 +50,7 @@ class NetworkActivity : BaseActivity(), CommonBusiness.UserListener {
     }
 
     override fun fail(msg: String?) {
-        TODO("Not yet implemented")
+
     }
 
 }
