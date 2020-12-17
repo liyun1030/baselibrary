@@ -197,10 +197,10 @@ public class TokenInterceptor implements Interceptor {
         SharedPreferencesUtils.getInstance(context, Constant.SP_NAME).clear();
         AtyContainer.getInstance().finishAllActivity();
         AppManager.getAppManager().finishAllActivity();
-        Intent intent=new Intent();
-        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-        intent.setAction("com.doctor.user.login");
-        context.startActivity(intent);
+//        Intent intent=new Intent();
+//        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+//        intent.setAction("com.doctor.user.login");
+//        context.startActivity(intent);
 
     }
 

@@ -12,6 +12,7 @@ import androidx.multidex.MultiDexApplication;
 import com.common.base.BuildConfig;
 import com.common.base.network.TokenInterceptor;
 import com.common.base.receiver.NetworkReceiver;
+import com.common.base.rxjava2.RetrofitUtil;
 import com.common.base.tool.SharedPreferencesUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
@@ -68,6 +69,7 @@ public abstract class BaseApplication extends MultiDexApplication {
         ARouterInit();
         //初始化OkGo
         init();
+        initRxjava();
         initOkGo();
         initUmeng();
         initJpush();
@@ -75,6 +77,10 @@ public abstract class BaseApplication extends MultiDexApplication {
             refWatcher = LeakCanary.install(this);
         }
         initNetworkReceiver();
+    }
+
+    private void initRxjava() {
+        RetrofitUtil.getInstance().init();
     }
 
     private void initNetworkReceiver() {

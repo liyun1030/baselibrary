@@ -43,6 +43,9 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
             case R.id.test_network:
                 startActivity(new Intent(this, NetworkActivity.class));
                 break;
+            case R.id.test_mvp:
+                startActivity(new Intent(this, NetworkMvpActivity.class));
+                break;
         }
     }
 

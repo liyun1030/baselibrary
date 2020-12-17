@@ -1,21 +1,26 @@
 package com.common.base.rxjava2;
 
-import android.graphics.Bitmap;
 
-import java.util.Map;
+import com.common.base.bean.UserLoginReModel;
+import com.common.base.rxjava2.Exception.ApiException;
 
-/**
- * @description:baseContract
- */
+import java.util.List;
 
-public interface BaseContract {
-    interface View extends BaseMVPView<Presenter> {
-        void setContent(String content);  //设置内容
-        void setCode(Bitmap value);  //设置验证码
+import io.reactivex.Observable;
+
+
+public class BaseContract {
+    public interface Persenter {
+        public void getCarList(String userId);
     }
 
-    interface Presenter extends BaseMVPPresenter {
-        void getCode(); //获取验证码
-        void userLogin(Map map); //登录
+    public interface View {
+        void getDataSuccess();
+        void getDataFail(ApiException apiException);
     }
+
+    public interface Model {
+        public Observable<RetrofitResponse<JavaBean>> login(UserLoginReModel model);
+    }
+
 }

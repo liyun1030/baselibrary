@@ -22,5 +22,9 @@
     <TextView
         android:id="@+id/test_network"
         style="@style/MatchWrapTv"
-        android:text="网络请求"/>
+        android:text="okgo网络请求"/>
+    <TextView
+        android:id="@+id/test_mvp"
+        style="@style/MatchWrapTv"
+        android:text="mvp网络请求"/>
 </LinearLayout>

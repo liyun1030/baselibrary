@@ -5,6 +5,7 @@ import com.common.base.network.TokenInterceptor;
 import java.util.concurrent.TimeUnit;
 
 import okhttp3.OkHttpClient;
+import okhttp3.Request;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -16,6 +17,8 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class RetrofitUtil {
     private static OkHttpClient mOkHttpClient;
     public static final int TIMEOUT = 60;//超时时间
+    private static volatile RetrofitRequest request = null;
+    Retrofit mRetrofit = null;
     /**
      * 超时时间
      */
@@ -40,19 +43,15 @@ public class RetrofitUtil {
     /**
      * 初始化Retrofit
      */
-    public <T> Object initRetrofit(String hostUrl, Class cls) {
-        if (cls != null) {
-            Retrofit mRetrofit = new Retrofit.Builder()
-                    .client(initOKHttp())
-                    // 设置请求的域名
-                    .baseUrl(hostUrl)
-                    // 设置解析转换工厂，用自己定义的
-                    .addConverterFactory(GsonConverterFactory.create())
-                    .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-                    .build();
-            return mRetrofit.create(cls);
-        }
-        return null;
+    public void init() {
+        mRetrofit = new Retrofit.Builder()
+                .client(initOKHttp())
+                // 设置请求的域名
+                .baseUrl(RetrofitRequest.HOST)
+                // 设置解析转换工厂，用自己定义的
+                .addConverterFactory(GsonConverterFactory.create())
+                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
+                .build();
     }
 
     /**
@@ -74,5 +73,14 @@ public class RetrofitUtil {
                     .build();
         }
         return mOkHttpClient;
+    }
+
+    public RetrofitRequest getRequest() {
+        if (request == null) {
+            synchronized (RetrofitRequest.class) {
+                request = mRetrofit.create(RetrofitRequest.class);
+            }
+        }
+        return request;
     }
 }

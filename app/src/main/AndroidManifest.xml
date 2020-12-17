@@ -3,10 +3,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.ly.baselibrary">
 
-<!--    <permission-->
-<!--        android:name="com.ly.baselibrary.permission.JPUSH_MESSAGE"-->
-<!--        android:protectionLevel="signature" />-->
-<!--    <uses-permission android:name="com.ly.baselibrary.permission.JPUSH_MESSAGE" />-->
+    <!--    <permission-->
+    <!--        android:name="com.ly.baselibrary.permission.JPUSH_MESSAGE"-->
+    <!--        android:protectionLevel="signature" />-->
+    <!--    <uses-permission android:name="com.ly.baselibrary.permission.JPUSH_MESSAGE" />-->
     <uses-permission android:name="android.permission.VIBRATE" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
 
@@ -35,6 +35,9 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.ly.baselibrary.NetworkActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ly.baselibrary.NetworkMvpActivity"
             android:screenOrientation="portrait" />
 
         <meta-data
@@ -67,6 +70,7 @@
         <meta-data
             android:name="JPUSH_CHANNEL"
             android:value="${JPUSH_CHANNEL}" />
+
         <receiver
             android:name="com.common.base.receiver.JpushReceiver"
             android:enabled="true"
