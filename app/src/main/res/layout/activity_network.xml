@@ -22,7 +22,11 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Get示例"/>
-    case R.id.test_mvp:
-    startActivity(new Intent(this, NetworkMvpActivity.class));
-    break;
+
+    <TextView
+        android:id="@+id/koinTxt"
+        style="@style/MatchWrapTv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Koin示例"/>
 </LinearLayout>

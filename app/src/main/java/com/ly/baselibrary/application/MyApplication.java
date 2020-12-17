@@ -95,7 +95,6 @@ public class MyApplication extends BaseApplication {
         AppBuildConfig.VERSION_CODE = BuildConfig.VERSION_CODE;
         AppBuildConfig.VERSION_NAME = BuildConfig.VERSION_NAME;
     }
-
     /**
      * 初始化极光
      */
@@ -132,7 +131,7 @@ public class MyApplication extends BaseApplication {
     }
 
 
-    static class UILImageLoader implements cn.finalteam.galleryfinal.ImageLoader {
+    static class UILImageLoader implements ImageLoader {
 
         private static final long serialVersionUID = -2557823134590140760L;
         private Bitmap.Config mImageConfig;

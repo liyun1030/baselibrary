@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+
 Properties properties = new Properties()
 properties.load(project.rootProject.file('gradle.properties').newDataInputStream())
 android {
@@ -198,5 +199,10 @@ dependencies {
     api develop.permissions.easypermission
     api develop.kotlin_coroutines.kotlinx_coroutines_android
     api develop.kotlin_coroutines.kotlinx_coroutines_core
+
+    api develop.koin.koin_android
+    api develop.koin.koin_androidx_scope
+    api develop.koin.koin_androidx_viewmodel
+
     implementation project(':basetool')
 }
