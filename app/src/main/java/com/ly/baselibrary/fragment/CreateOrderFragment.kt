@@ -1,5 +1,6 @@
 package com.curefun.pbl.fragment
 
+import android.content.Intent
 import com.amap.api.track.AMapTrackClient
 import com.amap.api.track.ErrorCode
 import com.amap.api.track.OnTrackLifecycleListener
@@ -8,11 +9,13 @@ import com.amap.api.track.query.model.*
 import com.common.base.adapter.BaseMultiTypeAdapter
 import com.common.base.fragment.BaseFragment
 import com.common.base.network.Constant
+import com.common.base.tool.AndroidUtil
 import com.common.base.tool.CommUtils
 import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.ly.baselibrary.R
 import com.ly.baselibrary.application.MyApplication
 import com.ly.baselibrary.model.UserInfoModel
+import com.ly.baselibrary.ui.TrackServiceActivity
 import com.ly.baselibrary.view.NewOrderDialog
 import kotlinx.android.synthetic.main.fragment_create_order.*
 import me.drakeet.multitype.Items
@@ -214,6 +217,8 @@ class CreateOrderFragment : BaseFragment(), XRecyclerView.LoadingListener,
      */
     override fun agreen() {
         //前往目地的
+        var intent= Intent(activity, TrackServiceActivity::class.java)
+        AndroidUtil.startActivity(activity,intent,false)
     }
 
 }
