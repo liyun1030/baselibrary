@@ -39,14 +39,14 @@ public class PermissionUtil {
         List<PermissionItem> permissonItems = new ArrayList<PermissionItem>();
         permissonItems.add(new PermissionItem(Manifest.permission.CAMERA,"相机", R.drawable.permission_ic_camera));
         permissonItems.add(new PermissionItem(Manifest.permission.WRITE_EXTERNAL_STORAGE,"存储",R.drawable.permission_ic_storage));
-        permissonItems.add(new PermissionItem(Manifest.permission.SEND_SMS,"短信",R.drawable.permission_ic_sms));
-        permissonItems.add(new PermissionItem(Manifest.permission.READ_SMS,"短信",R.drawable.permission_ic_sms));
-        permissonItems.add(new PermissionItem(Manifest.permission.RECEIVE_SMS,"短信",R.drawable.permission_ic_sms));
-        permissonItems.add(new PermissionItem(Manifest.permission.CALL_PHONE,"打电话",R.drawable.permission_ic_phone));
+//        permissonItems.add(new PermissionItem(Manifest.permission.SEND_SMS,"短信",R.drawable.permission_ic_sms));
+//        permissonItems.add(new PermissionItem(Manifest.permission.READ_SMS,"短信",R.drawable.permission_ic_sms));
+//        permissonItems.add(new PermissionItem(Manifest.permission.RECEIVE_SMS,"短信",R.drawable.permission_ic_sms));
+//        permissonItems.add(new PermissionItem(Manifest.permission.CALL_PHONE,"打电话",R.drawable.permission_ic_phone));
         permissonItems.add(new PermissionItem(Manifest.permission.ACCESS_FINE_LOCATION,"定位",R.drawable.permission_ic_location));
-        permissonItems.add(new PermissionItem(Manifest.permission.READ_CONTACTS,"联系人",R.drawable.permission_ic_contacts));
-        permissonItems.add(new PermissionItem(Manifest.permission.RECORD_AUDIO,"语音",R.drawable.permission_ic_micro_phone));
-        permissonItems.add(new PermissionItem(Manifest.permission.READ_CALL_LOG,"通话记录",R.drawable.permission_ic_micro_phone));
+//        permissonItems.add(new PermissionItem(Manifest.permission.READ_CONTACTS,"联系人",R.drawable.permission_ic_contacts));
+//        permissonItems.add(new PermissionItem(Manifest.permission.RECORD_AUDIO,"语音",R.drawable.permission_ic_micro_phone));
+//        permissonItems.add(new PermissionItem(Manifest.permission.READ_CALL_LOG,"通话记录",R.drawable.permission_ic_micro_phone));
 //        permissonItems.add(new PermissionItem(Manifest.permission.BLUETOOTH,"蓝牙",R.drawable.permission_ic_micro_phone));
 //        permissonItems.add(new PermissionItem(Manifest.permission.NFC,"NFC",R.drawable.permission_ic_micro_phone));
         HiPermission.create(context)

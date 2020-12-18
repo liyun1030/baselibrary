@@ -10,9 +10,11 @@ import androidx.multidex.MultiDex;
 import androidx.multidex.MultiDexApplication;
 
 import com.common.base.BuildConfig;
+import com.common.base.network.Constant;
 import com.common.base.network.TokenInterceptor;
 import com.common.base.receiver.NetworkReceiver;
 import com.common.base.rxjava2.RetrofitUtil;
+import com.common.base.tool.BaseConstant;
 import com.common.base.tool.SharedPreferencesUtils;
 import com.lzy.okgo.OkGo;
 import com.lzy.okgo.cache.CacheEntity;
@@ -65,6 +67,7 @@ public abstract class BaseApplication extends MultiDexApplication {
             builder.detectFileUriExposure();
         }
         application = this;
+        Constant.SP_NAME=getSpName();
         spInstance = SharedPreferencesUtils.getInstance(this, getSpName());
         ARouterInit();
         //初始化OkGo
