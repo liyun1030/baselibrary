@@ -3,7 +3,7 @@ package com.common.base.bean;
 /**
  * Created by XuTao on 2016/4/21 0021.
  */
-public class UserLoginReModel {
+public class UserLoginReModel{
     private String account;
     private String device_token;
     private String device_type = "1";   //1代表手机

@@ -2,6 +2,7 @@ package com.common.base.rxjava2;
 
 
 import com.common.base.bean.UserLoginReModel;
+import com.common.base.rxjava2.model.JavaBean;
 
 import io.reactivex.Observable;
 

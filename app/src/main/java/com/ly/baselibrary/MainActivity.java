@@ -12,7 +12,8 @@ import androidx.appcompat.widget.Toolbar;
 
 import com.common.base.qrcode.core.BGAQRCodeUtil;
 import com.ly.baselibrary.mvp2.demo.dynamic.DynamicActivity;
-import com.ly.baselibrary.mvp2.demo.dynamic.LoginActivity;
+import com.ly.baselibrary.mvp2.demo.login.LoginActivity;
+import com.ly.baselibrary.mvvm.MvvmActivity;
 
 import java.util.List;
 
@@ -56,6 +57,9 @@ public class MainActivity extends AppCompatActivity implements EasyPermissions.P
                 break;
             case R.id.test_dynamic:
                 startActivity(new Intent(this, DynamicActivity.class));
+                break;
+            case R.id.test_mvvm:
+                startActivity(new Intent(this, MvvmActivity.class));
                 break;
         }
     }

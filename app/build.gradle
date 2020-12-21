@@ -190,7 +190,7 @@ configurations.all {
 }
 dependencies {
     implementation fileTree(dir:'libs', include: ['*.jar'])
-    api "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin_version"
+    api develop.kotlin_jdk
     api develop.support.constraint_layout
     api develop.support.appcompat
     api develop.support.recyclerview
@@ -198,8 +198,6 @@ dependencies {
     api develop.rxjava.rxandroid
     api develop.retrofit2.retrofit
     api develop.permissions.easypermission
-    api develop.kotlin_coroutines.kotlinx_coroutines_android
-    api develop.kotlin_coroutines.kotlinx_coroutines_core
 
     api develop.koin.koin_android
     api develop.koin.koin_androidx_scope

@@ -80,10 +80,13 @@
             android:name="com.ly.baselibrary.mvp2.demo.dynamic.DynamicActivity"
             android:screenOrientation="portrait" />
         <activity
-            android:name="com.ly.baselibrary.mvp2.demo.dynamic.LoginActivity"
+            android:name="com.ly.baselibrary.mvp2.demo.login.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.ly.baselibrary.ui.TrackServiceActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ly.baselibrary.mvvm.MvvmActivity"
             android:screenOrientation="portrait" />
 
         <meta-data

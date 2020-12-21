@@ -1,8 +1,7 @@
 package com.common.base.rxjava2;
 
 import com.common.base.bean.UserLoginReModel;
-
-import java.util.List;
+import com.common.base.rxjava2.model.JavaBean;
 
 import io.reactivex.Observable;
 import retrofit2.http.Body;

@@ -1,7 +1,6 @@
 package com.common.base.rxjava2.activity;
 
 import com.common.base.rxjava2.presenter.BaseMvpPresenter;
-import com.common.base.rxjava2.presenter.BasePresenter;
 import com.common.base.rxjava2.view.BaseMvpView;
 
 public abstract class BaseMvpActivity<V extends BaseMvpView, P extends BaseMvpPresenter<V>> extends SuperMvpActivity {

@@ -39,4 +39,8 @@
         android:id="@+id/test_dynamic"
         style="@style/MatchWrapTv"
         android:text="动态列表请求"/>
+    <TextView
+        android:id="@+id/test_mvvm"
+        style="@style/MatchWrapTv"
+        android:text="mvvm请求"/>
 </LinearLayout>

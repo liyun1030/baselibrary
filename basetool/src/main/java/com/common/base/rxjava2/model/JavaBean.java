@@ -1,7 +1,9 @@
-package com.common.base.rxjava2;
+package com.common.base.rxjava2.model;
 
 import android.os.Parcel;
 import android.os.Parcelable;
+
+import com.common.base.rxjava2.RetrofitResponse;
 
 
 public class JavaBean extends RetrofitResponse implements Parcelable {

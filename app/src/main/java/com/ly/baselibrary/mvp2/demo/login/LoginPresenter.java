@@ -45,7 +45,7 @@ public class LoginPresenter  extends BaseMvpPresenter<LoginView> {
                     .subscribe(new Observer<UserBean>() {
                         @Override
                         public void onSubscribe(Disposable d) {
-
+                                System.out.println(d.isDisposed());
                         }
 
                         @Override

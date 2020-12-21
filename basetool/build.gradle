@@ -1,7 +1,6 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
-
 android {
     compileSdkVersion build_versions.target_sdk
     buildToolsVersion build_versions.build_tools
@@ -79,7 +78,7 @@ repositories {
 dependencies {
     api fileTree(dir: 'libs', include: ['*.jar'])
     api develop.support.appcompat
-    api "org.jetbrains.kotlin:kotlin-stdlib:$versions.kotlin_version"
+    api develop.kotlin_jdk
     api develop.support.design
     api develop.multidex
     api develop.support.constraint_layout
@@ -147,6 +146,12 @@ dependencies {
     api develop.universal_image_loader
     api develop.bingoogolapple.qrcode_core
     api develop.androidx_appcompat
+
+    api develop.core_ktx
+    api develop.kotlin_coroutines.kotlinx_coroutines_android
+    api develop.kotlin_coroutines.kotlinx_coroutines_core
+    api develop.androidx_lifecycle_extension
+    api develop.androidx_lifecycle_vm_ktx
     //侧滑返回
     api develop.swipebacklayout
     api develop.opensdk

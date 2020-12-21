@@ -1,4 +1,4 @@
-package com.ly.baselibrary.mvp2.demo.dynamic;
+package com.ly.baselibrary.mvp2.demo.login;
 import android.content.Intent
 import android.text.TextUtils
 import android.view.View
@@ -8,8 +8,6 @@ import com.common.base.tool.CommUtils
 import com.google.gson.Gson
 import com.ly.baselibrary.MainActivity
 import com.ly.baselibrary.R
-import com.ly.baselibrary.mvp2.demo.login.LoginPresenter
-import com.ly.baselibrary.mvp2.demo.login.LoginView
 import com.ly.baselibrary.mvp2.demo.model.UserBean
 import kotlinx.android.synthetic.main.activity_login.*
 
