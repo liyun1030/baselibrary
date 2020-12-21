@@ -62,7 +62,7 @@ public class TrackServiceActivity extends Activity implements LocationSource, AM
      * <p>
      * 猎鹰轨迹服务，同一个开发者账号下的key可以直接使用同账号下的sid，不再需要人工绑定
      */
-    public static final long SERVICE_ID = 2260;
+    public static final long SERVICE_ID = 238678;
     private String TERMINAL_NAME = "";
 
     //定位需要的数据

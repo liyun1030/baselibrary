@@ -27,4 +27,16 @@
         android:id="@+id/test_mvp"
         style="@style/MatchWrapTv"
         android:text="mvp网络请求"/>
+    <TextView
+        android:id="@+id/test_mvp2"
+        style="@style/MatchWrapTv"
+        android:text="mvp网络请求2"/>
+    <TextView
+        android:id="@+id/test_login"
+        style="@style/MatchWrapTv"
+        android:text="登录"/>
+    <TextView
+        android:id="@+id/test_dynamic"
+        style="@style/MatchWrapTv"
+        android:text="动态列表请求"/>
 </LinearLayout>

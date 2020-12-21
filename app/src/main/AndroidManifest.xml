@@ -49,6 +49,9 @@
             </intent-filter>
         </activity>
         <activity
+            android:name="com.ly.baselibrary.MainActivity"
+            android:screenOrientation="portrait" />
+        <activity
             android:name="com.ly.baselibrary.ui.HomeActivity"
             android:screenOrientation="portrait" />
         <activity
@@ -69,6 +72,15 @@
             android:screenOrientation="portrait" />
         <activity
             android:name="com.ly.baselibrary.NetworkMvpActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ly.baselibrary.NetworkMvp2Activity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ly.baselibrary.mvp2.demo.dynamic.DynamicActivity"
+            android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ly.baselibrary.mvp2.demo.dynamic.LoginActivity"
             android:screenOrientation="portrait" />
         <activity
             android:name="com.ly.baselibrary.ui.TrackServiceActivity"
