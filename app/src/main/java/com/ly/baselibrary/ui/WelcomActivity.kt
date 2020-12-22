@@ -21,12 +21,12 @@ class WelcomActivity : BaseActivity() {
         model = MyApplication.getInstance().spInstance.getObject(Constant.SP_USER_KEY, UserInfoModel::class.java)
         versionTxt!!.text = "V " + CommUtils.getMetaInfo(this, "VERSION_NAME")
         versionTxt.postDelayed({
-            AndroidUtil.openActivity(this@WelcomActivity, Intent(this@WelcomActivity, MainActivity::class.java), true)
-//            if (model != null) {
-//                AndroidUtil.openActivity(this@WelcomActivity, Intent(this@WelcomActivity, HomeActivity::class.java), true)
-//            } else {
-//                AndroidUtil.openActivity(this@WelcomActivity, Intent(this@WelcomActivity, LoginActivity::class.java), true)
-//            }
+//            AndroidUtil.openActivity(this@WelcomActivity, Intent(this@WelcomActivity, MainActivity::class.java), true)
+            if (model != null) {
+                AndroidUtil.openActivity(this@WelcomActivity, Intent(this@WelcomActivity, HomeActivity::class.java), true)
+            } else {
+                AndroidUtil.openActivity(this@WelcomActivity, Intent(this@WelcomActivity, LoginActivity::class.java), true)
+            }
         }, 1000)
     }
 }

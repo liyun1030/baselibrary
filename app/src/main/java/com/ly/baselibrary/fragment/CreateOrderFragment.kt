@@ -15,6 +15,7 @@ import com.jcodecraeer.xrecyclerview.XRecyclerView
 import com.ly.baselibrary.R
 import com.ly.baselibrary.application.MyApplication
 import com.ly.baselibrary.model.UserInfoModel
+import com.ly.baselibrary.ui.TrackActivity
 import com.ly.baselibrary.ui.TrackServiceActivity
 import com.ly.baselibrary.view.NewOrderDialog
 import kotlinx.android.synthetic.main.fragment_create_order.*
@@ -53,7 +54,6 @@ class CreateOrderFragment : BaseFragment(), XRecyclerView.LoadingListener,
 //        divider.setDrawable(ContextCompat.getDrawable(this.activity!!, R.drawable.custom_divider_class)!!)
 //        listView.addItemDecoration(divider)
         newOrderDialog = NewOrderDialog(activity, this)
-        newOrderDialog?.show()
         emptyLayout.setOnClickListener {
             onRefresh()
         }
@@ -198,6 +198,7 @@ class CreateOrderFragment : BaseFragment(), XRecyclerView.LoadingListener,
     override fun onResume() {
         super.onResume()
         items.clear()
+        newOrderDialog?.show()
     }
 
 
@@ -217,7 +218,7 @@ class CreateOrderFragment : BaseFragment(), XRecyclerView.LoadingListener,
      */
     override fun agreen() {
         //前往目地的
-        var intent= Intent(activity, TrackServiceActivity::class.java)
+        var intent= Intent(activity, TrackActivity::class.java)//TrackServiceActivity
         AndroidUtil.startActivity(activity,intent,false)
     }
 

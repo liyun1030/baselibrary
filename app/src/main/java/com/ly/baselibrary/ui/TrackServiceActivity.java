@@ -6,9 +6,11 @@ import android.app.Notification;
 import android.app.NotificationChannel;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
+import android.content.Context;
 import android.content.Intent;
 import android.location.Location;
 import android.os.Build;
+import android.provider.Settings;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.Toast;
@@ -21,6 +23,7 @@ import com.amap.api.maps.AMap;
 import com.amap.api.maps.CameraUpdateFactory;
 import com.amap.api.maps.LocationSource;
 import com.amap.api.maps.TextureMapView;
+import com.amap.api.maps.model.LatLng;
 import com.amap.api.maps.model.MyLocationStyle;
 import com.amap.api.track.AMapTrackClient;
 import com.amap.api.track.ErrorCode;
@@ -32,10 +35,13 @@ import com.amap.api.track.query.model.AddTrackRequest;
 import com.amap.api.track.query.model.AddTrackResponse;
 import com.amap.api.track.query.model.QueryTerminalRequest;
 import com.amap.api.track.query.model.QueryTerminalResponse;
+import com.basely.permission.util.LocationUtil;
 import com.common.base.network.Constant;
+import com.common.base.tool.CommUtils;
 import com.ly.baselibrary.R;
 import com.ly.baselibrary.application.MyApplication;
 import com.ly.baselibrary.model.UserInfoModel;
+import com.zdf.activitylauncher.ActivityLauncher;
 
 /**
  * 轨迹上报示例
@@ -157,13 +163,15 @@ public class TrackServiceActivity extends Activity implements LocationSource, AM
         model = MyApplication.getInstance().getSpInstance().getObject(
                 Constant.SP_USER_KEY,
                 UserInfoModel.class);
-        TERMINAL_NAME=model.getPhone();
+        TERMINAL_NAME = model.getPhone();
         // 不要使用Activity作为Context传入
         aMapTrackClient = new AMapTrackClient(getApplicationContext());
         aMapTrackClient.setInterval(5, 30);
 
         mapView = findViewById(R.id.activity_track_service_map);
         mapView.getMap().moveCamera(CameraUpdateFactory.zoomTo(14));
+        //114.379751,30.464747--梅花坞
+        mapView.getMap().moveCamera(CameraUpdateFactory.newLatLngZoom(new LatLng(30.464747, 114.379751),14));
         mapView.onCreate(savedInstanceState);
         // 启用地图内置定位
         mapView.getMap().setLocationSource(this);
@@ -173,7 +181,8 @@ public class TrackServiceActivity extends Activity implements LocationSource, AM
         myLocationStyle = new MyLocationStyle();//初始化定位蓝点样式类myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE);//连续定位、且将视角移动到地图中心点，定位点依照设备方向旋转，并且会跟随设备移动。（1秒1次定位）如果不设置myLocationType，默认也会执行此种模式。
         myLocationStyle.interval(2000); //设置连续定位模式下的定位间隔，只在连续定位模式下生效，单次定位模式下不会生效。单位为毫秒。
         mapView.getMap().setMyLocationStyle(myLocationStyle);//设置定位蓝点的Style
-        //aMap.getUiSettings().setMyLocationButtonEnabled(true);设置默认定位按钮是否显示，非必需设置。
+        mapView.getMap().getUiSettings().setMyLocationButtonEnabled(true);//设置默认定位按钮是否显示，非必需设置。
+        mapView.getMap().getUiSettings().setScaleControlsEnabled(true);//控制比例尺控件是否显示
         mapView.getMap().setMyLocationEnabled(true);// 设置为true表示启动显示定位蓝点，false表示隐藏定位蓝点并不进行定位，默认是false。
         myLocationStyle.myLocationType(MyLocationStyle.LOCATION_TYPE_LOCATION_ROTATE);//连续定位、且将视角移动到地图中心点，定位点依照设备方向旋转，并且会跟随设备移动。（1秒1次定位）默认执行此种模式。
 
@@ -219,6 +228,11 @@ public class TrackServiceActivity extends Activity implements LocationSource, AM
                 uploadToTrack = isChecked;
             }
         });
+        if(LocationUtil.getInstance(this).isOpenGps()){
+            startLocation();
+        }else{
+            start2Location();
+        }
     }
 
     private void updateBtnStatus() {
@@ -362,6 +376,10 @@ public class TrackServiceActivity extends Activity implements LocationSource, AM
     @Override
     public void activate(OnLocationChangedListener onLocationChangedListener) {
         mListener = onLocationChangedListener;
+        startLocation();
+    }
+
+    public void startLocation() {
         if (mlocationClient == null) {
             //初始化定位
             mlocationClient = new AMapLocationClient(this);
@@ -379,8 +397,26 @@ public class TrackServiceActivity extends Activity implements LocationSource, AM
             // 在定位结束后，在合适的生命周期调用onDestroy()方法
             // 在单次定位情况下，定位无论成功与否，都无需调用stopLocation()方法移除请求，定位sdk内部会移除
             mlocationClient.startLocation();//启动定位
+        }else{
+            mlocationClient.startLocation();//启动定位
         }
+    }
 
+    public void start2Location() {
+        Intent intent = new Intent();
+        intent.setAction(Settings.ACTION_LOCATION_SOURCE_SETTINGS);
+        ActivityLauncher.init(this).startActivityForResult(intent, new ActivityLauncher.Callback() {
+            @Override
+            public void onActivityResult(int resultCode, Intent data) {
+                //授权了就去安装
+                if (resultCode == Activity.RESULT_OK) {
+                    startLocation();
+                    mapView.onResume();
+                } else {
+                    CommUtils.showToast(TrackServiceActivity.this, "手机系统的定位服务未开启，无法定位!");
+                }
+            }
+        });
     }
 
     @Override

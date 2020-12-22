@@ -88,6 +88,9 @@
         <activity
             android:name="com.ly.baselibrary.mvvm.MvvmActivity"
             android:screenOrientation="portrait" />
+        <activity
+            android:name="com.ly.baselibrary.ui.TrackActivity"
+            android:screenOrientation="portrait" />
 
         <meta-data
             android:name="BASE_URL"

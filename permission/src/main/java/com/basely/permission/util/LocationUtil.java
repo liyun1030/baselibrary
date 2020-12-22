@@ -2,14 +2,23 @@ package com.basely.permission.util;
 
 import java.util.List;
 
+import android.Manifest;
 import android.annotation.SuppressLint;
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
+import android.os.Build;
 import android.os.Bundle;
 import android.provider.Settings;
+import android.view.View;
+
+import com.zdf.activitylauncher.ActivityLauncher;
+
+import me.weyye.hipermission.HiPermission;
 
 /**
  * 获取用户的地理位置
@@ -74,7 +83,34 @@ public class LocationUtil {
         locationManager.requestLocationUpdates(locationProvider, 3000, 1, locationListener);
         return null;
     }
-
+    /**
+     * 定位权限检查-精确位置
+     */
+    public boolean checkPermission() {
+        if (HiPermission.checkPermission(mContext, Manifest.permission.ACCESS_FINE_LOCATION)) {
+            return true;
+        }
+        return false;
+    }
+    public boolean isOpenGps(){
+        LocationManager lm = (LocationManager) mContext.getSystemService(Context.LOCATION_SERVICE);
+        boolean ok = lm.isProviderEnabled(LocationManager.GPS_PROVIDER);
+        if (ok) {//开启了定位服务
+            if (Build.VERSION.SDK_INT >= 23) {
+                if (checkPermission()) {
+                    //开启了定位权限
+                   return true;
+                } else {
+                   return false;
+                }
+            } else {
+                //6.0以下不需要
+                return true;
+            }
+        } else {//未开启定位服务
+           return false;
+        }
+    }
 
     public LocationListener locationListener = new LocationListener() {
 

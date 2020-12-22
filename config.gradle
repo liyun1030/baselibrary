@@ -64,38 +64,55 @@ ext {
 }
 
 def develop = [:]
+/**
+ * support库支持
+ */
 develop.support = [constraint_layout: "com.android.support.constraint:constraint-layout:$versions.constraint_layout",
                    appcompat        : "com.android.support:appcompat-v7:$versions.appcompat",
                    design           : "com.android.support:design:$versions.appcompat",
                    recyclerview     : "com.android.support:recyclerview-v7:$versions.appcompat",
                    support_v4       : "com.android.support:support-v4:$versions.appcompat"]
 
-
+/**
+ * 网络请求--okhttp,okgo
+ */
 develop.ok_http = [okhttp3            : "com.squareup.okhttp3:okhttp:$versions.okhttp",
                    logging_interceptor: "com.squareup.okhttp3:logging-interceptor:$versions.okhttp",
                    urlconnection      : "com.squareup.okhttp3:okhttp-urlconnection:$versions.okhttp",
                    okgo               : "com.lzy.net:okgo:$versions.okgo",
                    okserver           : "com.lzy.net:okserver:$versions.okserver"]
-
+/**
+ *Retrofit 是一个 RESTful 的 HTTP 网络请求框架的封装
+ */
 develop.retrofit2 = [retrofit       : "com.squareup.retrofit2:retrofit:$versions.retrofit",
                      gson           : "com.squareup.retrofit2:converter-gson:$versions.retrofit",
                      adapter_rxjava2: "com.squareup.retrofit2:adapter-rxjava2:$versions.retrofit"]
-
+/**
+ * 图片请求框架
+ */
 develop.glide = [glide   : "com.github.bumptech.glide:glide:$versions.glide",
                  compiler: "com.github.bumptech.glide:compiler:$versions.glide",
                  okhttp3 : "com.github.bumptech.glide:okhttp3-integration:$versions.glide"]
-
+/**
+ * rxjava2+rxandroid
+ */
 develop.rxjava = [rxjava2  : "io.reactivex.rxjava2:rxjava:$versions.rxjava",
                   rxandroid: "io.reactivex.rxjava2:rxandroid:$versions.rxandroid"]
 
 develop.gson = "com.google.code.gson:gson:$versions.gson"
-
+/**
+ * eventbus-数据总线
+ */
 develop.eventbus = "org.greenrobot:eventbus:$versions.eventbus"
 develop.multidex = "com.android.support:multidex:$versions.multidex_version"
-
+/**
+ * 权限操作库
+ */
 develop.permissions = [easypermission: "pub.devrel:easypermissions:$versions.easypermission",
                        hipermission  : "me.weyye.hipermission:library:$versions.hipermission"]
-
+/**
+ * 图片，条码，二维码，流式布局，banner库封装
+ */
 develop.bingoogolapple = [photopicker: "cn.bingoogolapple:bga-photopicker:$versions.photopicker",
                           baseadapter: "cn.bingoogolapple:bga-baseadapter:$versions.baseadapter",
                           flowlayout : "cn.bingoogolapple:bga-flowlayout:$versions.flowlayout",
@@ -103,56 +120,89 @@ develop.bingoogolapple = [photopicker: "cn.bingoogolapple:bga-photopicker:$versi
                           zxing      : "cn.bingoogolapple:bga-qrcode-zxing:$versions.zxing",
                           zbar       : "cn.bingoogolapple:bga-qrcode-zbar:$versions.zxing",
                           qrcode_core: "cn.bingoogolapple:bga-qrcode-core:$versions.zxing"]
+/**
+ * 内存运行，异常跟踪
+ */
 develop.leakcanary = [leakcanary_android         : "com.squareup.leakcanary:leakcanary-android:$versions.leakcanary_android",
                       leakcanary_android_no_op   : "com.squareup.leakcanary:leakcanary-android-no-op:$versions.leakcanary_android",
                       leakcanary_support_fragment: "com.squareup.leakcanary:leakcanary-support-fragment:$versions.leakcanary_android"]
+
+/**
+ * 极光推送
+ */
 develop.jpush = [jiguang_jpush: "cn.jiguang.sdk:jpush:$versions.jiguang_jpush",
                  jiguang_jcore: "cn.jiguang.sdk:jcore:$versions.jiguang_jcore"]
-//极光推送
 develop.fastjson = "com.alibaba:fastjson:$versions.fastjson"
 
+/**
+ * androidx支持
+ */
 develop.androidx_appcompat = "androidx.appcompat:appcompat:$versions.androidx_appcompat"
-develop.multitype = "me.drakeet.multitype:multitype:$versions.multitype"
 develop.androidx_swiperefresh = "androidx.swiperefreshlayout:swiperefreshlayout:$versions.androidx_swiperefresh"
-//kotlin的依籁注入框加
+develop.multitype = "me.drakeet.multitype:multitype:$versions.multitype"
+/**
+ * kotlin的依籁注入框加
+ */
 develop.koin = [
         koin_android           : "org.koin:koin-android:$versions.koin_version",
         koin_androidx_scope    : "org.koin:koin-androidx-scope:$versions.koin_version",
         koin_androidx_viewmodel: "org.koin:koin-androidx-viewmodel:$versions.koin_version"
 ]
+/**
+ * 高德地图
+ */
 develop.amap = [
         amap_location  : "org.koin:koin-androidx-scope:$versions.amap_location",
         amap_navi_3dmap: "com.amap.api:navi-3dmap:$versions.amap_3dmap"
 ]
 develop.guava = "com.google.guava:guava:$versions.guava"
+/**
+ * tablayout依籁
+ */
 develop.flyco_tablayout = "com.flyco.tablayout:FlycoTabLayout_Lib:$versions.flyco_tablayout"
 develop.gallery_final = "cn.finalteam:galleryfinal:$versions.gallery_final"
 develop.universal_image_loader = "com.nostra13.universalimageloader:universal-image-loader:$versions.universal_image_loader"
 
+/**
+ * rxbus事件总线
+ */
 develop.rxbus = "com.hwangjr.rxbus:rxbus:$versions.rxbus"
 
 develop.barlibrary = "com.gyf.barlibrary:barlibrary:$versions.barlibrary"
 
+/**
+ *Butter Knife 是 Android 视图字段和方法绑定，使用注解处理来生成样板代码。
+ */
 develop.butterknife = [butterknife         : "com.jakewharton:butterknife:$versions.butterknife",
                        butterknife_compiler: "com.jakewharton:butterknife-compiler:$versions.butterknife"]
 develop.kotlin_coroutines = [kotlinx_coroutines_android: "org.jetbrains.kotlinx:kotlinx-coroutines-android:$versions.kotlinx_coroutines_android",
                              kotlinx_coroutines_core   : "org.jetbrains.kotlinx:kotlinx-coroutines-core:$versions.kotlinx_coroutines_core"]
+/**
+ * 系统权限开关-监听
+ */
 develop.activityLauncher = "com.github.bbssyyuui:ActivityLauncher:$versions.activityLauncher"
 
 develop.xrecyclerview = "com.jcodecraeer:xrecyclerview:$versions.xrecyclerview"
 develop.readystatesoftware = [readystatesoftware     : "com.readystatesoftware.chuck:library:$versions.readystatesoftware",
                               readystatesoftware_noop: "com.readystatesoftware.chuck:library-no-op:$versions.readystatesoftware"]
-
+/**
+ * 页面滑动返回支持
+ */
 develop.swipebacklayout = "me.imid.swipebacklayout.lib:library:$versions.swipebacklayout"
 
 develop.opensdk = "com.tencent.mm.opensdk:wechat-sdk-android-with-mta:$versions.opensdk"
-develop.core_ktx = "androidx.core:core-ktx:$versions.androidx_core_ktx"
 
+/**
+ * androidx-ktx支持
+ */
+develop.core_ktx = "androidx.core:core-ktx:$versions.androidx_core_ktx"
 develop.androidx_lifecycle_extension = "androidx.lifecycle:lifecycle-extensions:$versions.androidx_mvvm_lifecycle"
 develop.androidx_lifecycle_vm_ktx = "androidx.lifecycle:lifecycle-viewmodel-ktx:$versions.androidx_mvvm_lifecycle"
 develop.kotlin_jdk = "org.jetbrains.kotlin:kotlin-stdlib-jdk7:$versions.kotlin_version"
 
-
+/**
+ * emoji表情过滤
+ */
 develop.xedittext = "com.xw.repo:xedittext:$versions.xedittext" //emoji表情过滤
 develop.stetho = "com.facebook.stetho:stetho-okhttp3:$versions.stetho"
 develop.bubbleseekbar = "com.xw.repo:bubbleseekbar:$versions.bubbleseekbar"
@@ -177,14 +227,15 @@ def addRepos(handler) {
     handler.maven { url 'https://maven.aliyun.com/repository/google' }
     handler.maven { url 'https://maven.aliyun.com/repository/public' }
     handler.maven { url 'https://maven.google.com' }
+}
+
+ext.addRepos = this.&addRepos
+
 //    handler.maven {
-    //私有仓库需要密码
+//私有仓库需要密码
 //        url 'http://172.16.20.167:8081/repository/maven-releases/'
 //        credentials {
 //            username 'admin'
 //            password 'dxyt2020'
 //        }
 //    }
-}
-
-ext.addRepos = this.&addRepos
