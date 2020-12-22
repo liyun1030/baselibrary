@@ -219,6 +219,9 @@ public class TrackActivity extends Activity implements LocationSource, AMapLocat
                 RandomAccessFile raf = new RandomAccessFile(targetFile, "rw");
                 //光标移到原始文件最后，再执行写入
                 raf.seek(targetFile.length());
+                Date date = new Date();
+                SimpleDateFormat sdf = new SimpleDateFormat("YYYY-MM-dd HH:mm:ss.SSS");
+                content+="["+sdf.format(date)+"]";
                 content+="\n";
                 raf.write(content.getBytes());
                 raf.close();
