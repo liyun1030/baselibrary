@@ -35,6 +35,14 @@ class HomeActivity : BaseActivity() {
         setSwipeBackEnable(false)
     }
 
+    override fun allowCaptureScreen(): Boolean {
+        return false
+    }
+
+    override fun allowRecordScreen(): Boolean {
+        return false
+    }
+
     private val titles = arrayOf("创单", "下线", "抢单")
 
     // 未被选中的图标

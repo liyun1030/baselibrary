@@ -54,6 +54,14 @@ class NetworkMvp2Activity : BaseActivity(), CommonBusiness.UserListener, BaseCon
         },200)
     }
 
+    override fun allowCaptureScreen(): Boolean {
+        return true
+    }
+
+    override fun allowRecordScreen(): Boolean {
+        return true
+    }
+
     override fun loginSucc(model: ThirdLoginByResModel?) {
         CommUtils.showToast(this, model?.data?.username)
     }

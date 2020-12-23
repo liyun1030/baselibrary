@@ -29,4 +29,12 @@ class WelcomActivity : BaseActivity() {
             }
         }, 1000)
     }
+
+    override fun allowCaptureScreen(): Boolean {
+        return true
+    }
+
+    override fun allowRecordScreen(): Boolean {
+        return true
+    }
 }

@@ -3,19 +3,24 @@ package com.common.base.activity;
 import android.content.pm.ActivityInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Toast;
 import android.widget.Toolbar;
 
+import androidx.annotation.RequiresApi;
 import androidx.core.content.ContextCompat;
 
 import com.common.base.R;
 import com.common.base.tool.AtyContainer;
 import com.common.base.tool.BaseConstant;
+import com.common.base.tool.CommUtils;
 import com.common.base.view.LoadingDialog;
 import com.gyf.barlibrary.ImmersionBar;
 import com.lzy.okgo.OkGo;
+
 import java.util.List;
 
 import butterknife.ButterKnife;
@@ -48,7 +53,14 @@ public abstract class BaseActivity extends SwipeBackActivity implements EasyPerm
         }
         super.onCreate(savedInstanceState);
         AtyContainer.getInstance().addActivity(this);
-        Log.e("onCreate", this.getClass().getSimpleName().toString());
+        if (!allowCaptureScreen()) {
+            //不允许截屏
+            getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
+        }
+        if(!allowRecordScreen()){
+            getWindow().setFlags(WindowManager.LayoutParams.FLAG_SECURE, WindowManager.LayoutParams.FLAG_SECURE);
+        }
+
         setContentView(getLayoutId());
         AppManager.getAppManager().addActivity(this);
         unbinder = ButterKnife.bind(this);
@@ -60,7 +72,15 @@ public abstract class BaseActivity extends SwipeBackActivity implements EasyPerm
 
     public abstract void init();
 
+    /**
+     * 禁止截屏
+     */
+    public abstract boolean allowCaptureScreen();
 
+    /**
+     * 禁止录屏和截屏
+     */
+    public abstract boolean allowRecordScreen();
     @Override
     protected void onResume() {
         super.onResume();
@@ -70,7 +90,19 @@ public abstract class BaseActivity extends SwipeBackActivity implements EasyPerm
     protected void onPause() {
         super.onPause();
     }
-
+    /**
+     * 检测是否分屏或切屏
+     * 禁止分屏：在AndroidManifest的application下加入 android:resizeableActivity="false"即可
+     */
+    @RequiresApi(api = Build.VERSION_CODES.N)
+    @Override
+    public void onMultiWindowModeChanged(boolean isInMultiWindowMode) {
+        //isInMultiWindowMode为true则表示进入了分屏模式，(官方话是多窗口模式)
+        super.onMultiWindowModeChanged(isInMultiWindowMode);
+        if(isInMultiWindowMode){
+            CommUtils.showToast(this, "监测到当前有作弊行为");
+        }
+    }
     /**
      * 检查重复点击
      *
@@ -182,21 +214,23 @@ public abstract class BaseActivity extends SwipeBackActivity implements EasyPerm
 
     /**
      * 当权限被成功申请的时候执行回调
+     *
      * @param requestCode 权限请求的识别码
      * @param perms       申请的权限的名字
      */
     @Override
-    public void onPermissionsGranted(int requestCode,  List<String> perms) {
+    public void onPermissionsGranted(int requestCode, List<String> perms) {
         Log.i("EasyPermissions", "获取成功的权限$perms");
     }
 
     /**
      * 当权限申请失败的时候执行的回调
+     *
      * @param requestCode 权限请求的识别码
      * @param perms       申请的权限的名字
      */
     @Override
-    public void onPermissionsDenied(int requestCode,  List<String> perms) {
+    public void onPermissionsDenied(int requestCode, List<String> perms) {
         //处理权限名字字符串
         StringBuffer sb = new StringBuffer();
         for (String str : perms) {
@@ -219,12 +253,13 @@ public abstract class BaseActivity extends SwipeBackActivity implements EasyPerm
     /**
      * 重写要申请权限的Activity或者Fragment的onRequestPermissionsResult()方法，
      * 在里面调用EasyPermissions.onRequestPermissionsResult()，实现回调。
+     *
      * @param requestCode  权限请求的识别码
      * @param permissions  申请的权限
      * @param grantResults 授权结果
      */
     @Override
-    public void onRequestPermissionsResult(int requestCode,  String[] permissions,  int[] grantResults) {
+    public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
         super.onRequestPermissionsResult(requestCode, permissions, grantResults);
         EasyPermissions.onRequestPermissionsResult(requestCode, permissions, grantResults, this);
     }

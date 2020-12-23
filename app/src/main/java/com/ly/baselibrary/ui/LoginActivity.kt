@@ -99,6 +99,14 @@ class LoginActivity : BaseActivity(), TextWatcher{
         }
     }
 
+    override fun allowCaptureScreen(): Boolean {
+        return true
+    }
+
+    override fun allowRecordScreen(): Boolean {
+        return true
+    }
+
     @Synchronized
     private fun login() {
         var phoneTxt = accountTxt.text.toString().trim()
