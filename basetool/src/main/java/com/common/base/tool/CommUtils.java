@@ -1,7 +1,6 @@
-package com.common.base.tool;
+package  com.common.base.tool;
 
 import android.app.Activity;
-import android.app.ActivityManager;
 import android.content.Context;
 import android.content.ContextWrapper;
 import android.content.pm.ApplicationInfo;
@@ -15,6 +14,7 @@ import android.net.NetworkInfo;
 import android.net.wifi.WifiInfo;
 import android.net.wifi.WifiManager;
 import android.os.Build;
+import android.os.Looper;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.TextUtils;
@@ -24,18 +24,25 @@ import android.util.Base64;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.util.TypedValue;
+import android.view.Gravity;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.PopupWindow;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.recyclerview.widget.LinearSmoothScroller;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.core.app.NotificationManagerCompat;
+
+import com.common.base.R;
 
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Field;
+import java.lang.reflect.InvocationHandler;
+import java.lang.reflect.Method;
+import java.lang.reflect.Proxy;
 import java.net.Inet6Address;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
@@ -44,6 +51,7 @@ import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.ParsePosition;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Enumeration;
@@ -56,13 +64,12 @@ import java.util.regex.Pattern;
 
 /**
  * 工具类
+ * Created by Administrator on 2015/9/28.
  */
 public class CommUtils {
-
     /**
      * 获取屏幕宽度
      *
-     * @param context
      * @return
      */
     public static int getWindowWidth(Context context) {
@@ -159,9 +166,28 @@ public class CommUtils {
      * @param resId
      */
     public static void showToast(Context ctx, int resId) {
+        if (ctx == null) return;
         Toast.makeText(ctx, resId, Toast.LENGTH_SHORT).show();
     }
-
+    /**
+     * 显示Toast
+     *
+     * @param ctx
+     * @param string
+     */
+    public static Toast getCustomToast(Context ctx, String string, int duration) {
+        if (ctx == null) return null;
+        if (TextUtils.isEmpty(string)) return null;
+        LayoutInflater inflater = LayoutInflater.from(ctx);
+        View view = inflater.inflate(R.layout.activity_custom_toast, null);
+        TextView msgTxt = view.findViewById(R.id.msgTxt);
+        msgTxt.setText(string);
+        Toast toast = new Toast(ctx);
+        toast.setGravity(Gravity.BOTTOM | Gravity.CENTER, 0, 200);
+        toast.setDuration(duration);
+        toast.setView(view);
+        return toast;
+    }
     /**
      * 显示Toast
      *
@@ -170,7 +196,68 @@ public class CommUtils {
      */
     public static void showToast(Context ctx, String string) {
         if (ctx == null) return;
-        Toast.makeText(ctx, string, Toast.LENGTH_SHORT).show();
+        if (TextUtils.isEmpty(string)) return;
+        show(ctx, string, Toast.LENGTH_SHORT);
+    }
+
+    public static void show(Context context, String message, int duration) {
+        if (TextUtils.isEmpty(message)) {
+            return;
+        }
+        //后setText 兼容小米默认会显示app名称的问题
+        //后setText 兼容小米默认会显示app名称的问题
+        Toast toast = getCustomToast(context, message, duration);
+        if (toast == null) return;
+        if (isNotificationEnabled(context)) {
+            toast.show();
+        } else {
+            showSystemToast(toast);
+        }
+    }
+
+    /**
+     * 显示系统Toast
+     */
+    private static void showSystemToast(Toast toast) {
+        try {
+            Method getServiceMethod = Toast.class.getDeclaredMethod("getService");
+            getServiceMethod.setAccessible(true);
+            final Object iNotificationManagerObj = getServiceMethod.invoke(null);
+
+            Class iNotificationManagerCls = Class.forName("android.app.INotificationManager");
+            Object iNotificationManagerProxy = Proxy.newProxyInstance(toast.getClass().getClassLoader(), new Class[]{iNotificationManagerCls}, new InvocationHandler() {
+                @Override
+                public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+                    //强制使用系统Toast
+                    if ("enqueueToast".equals(method.getName())
+                            || "enqueueToastEx".equals(method.getName())) {  //华为p20 pro上为enqueueToastEx
+                        args[0] = "android";
+                    }
+                    return method.invoke(iNotificationManagerObj, args);
+                }
+            });
+            Field sServiceFiled = Toast.class.getDeclaredField("sService");
+            sServiceFiled.setAccessible(true);
+            sServiceFiled.set(null, iNotificationManagerProxy);
+            toast.show();
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * 消息通知是否开启
+     *
+     * @return
+     */
+    private static boolean isNotificationEnabled(Context context) {
+        NotificationManagerCompat notificationManagerCompat = NotificationManagerCompat.from(context);
+        boolean areNotificationsEnabled = notificationManagerCompat.areNotificationsEnabled();
+        return areNotificationsEnabled;
+    }
+
+    public static boolean isMainThread() {
+        return Looper.getMainLooper() == Looper.myLooper();
     }
 
     /**
@@ -444,17 +531,6 @@ public class CommUtils {
         }
     }
 
-    public static String getMetaInfo(Context ctx, String key) {
-        String value = null;
-        try {
-            ApplicationInfo appInfo = ctx.getPackageManager().getApplicationInfo(ctx.getPackageName(), PackageManager.GET_META_DATA);
-            value = appInfo.metaData.getString(key);
-        } catch (PackageManager.NameNotFoundException e) {
-            e.printStackTrace();
-        }
-        return value;
-    }
-
     /**
      * 获取包名
      *
@@ -623,6 +699,9 @@ public class CommUtils {
         if (hour != 0) {
             return formatTimeZero(hour) + "时" + hourStr + formatTimeZero(minute) + "分";
         }
+        if (second == 0 && minute == 0) {
+
+        }
         return hourStr + formatTimeZero(minute) + "分" + formatTimeZero(second) + "秒";
     }
 
@@ -674,29 +753,6 @@ public class CommUtils {
         return m + ":" + s;
     }
 
-    /**
-     * 程序是否在前台运行
-     *
-     * @param context Application Context
-     * @return 程序是否在前台运行
-     */
-    public static boolean isAppOnForeground(Context context) {
-        ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
-        String packageName = context.getPackageName();
-
-        List<ActivityManager.RunningAppProcessInfo> appProcesses = activityManager
-                .getRunningAppProcesses();
-        if (appProcesses == null)
-            return false;
-
-        for (ActivityManager.RunningAppProcessInfo appProcess : appProcesses) {
-            if (appProcess.processName.equals(packageName)
-                    && appProcess.importance == ActivityManager.RunningAppProcessInfo.IMPORTANCE_FOREGROUND) {
-                return true;
-            }
-        }
-        return false;
-    }
 
     public static void showKeyboard(View v) {
         InputMethodManager imm = (InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
@@ -760,22 +816,6 @@ public class CommUtils {
         }
         return dest;
     }
-
-    /**
-     * 格式化学习人数
-     *
-     * @param count
-     * @return
-     */
-    public static String formatStudyCount(int count) {
-        if (count < 10000) {
-            return count + "人学习";
-        } else {
-            double format = count / 10000d;
-            return String.format(Locale.getDefault(), "%.2f", format) + "万人学习";
-        }
-    }
-
 
     /**
      * 结束时间格式化
@@ -1017,23 +1057,35 @@ public class CommUtils {
         }
     }
 
-    /**
-     * RecyclerView滑动到指定位置
-     *
-     * @param mContext
-     * @param rv
-     * @param tempPosition
-     */
-    public static void scrollerToDefaultLocation(Context mContext, RecyclerView rv, int tempPosition) {
-
-        LinearSmoothScroller smoothScroller = new LinearSmoothScroller(mContext) {
-            @Override
-            protected int getVerticalSnapPreference() {
-                return LinearSmoothScroller.SNAP_TO_START;
+    //获取已安装应用的 uid，-1 表示未安装此应用或程序异常
+    public static int getPackageUid(Context context, String packageName) {
+        try {
+            ApplicationInfo applicationInfo = context.getPackageManager().getApplicationInfo(packageName, 0);
+            if (applicationInfo != null) {
+                return applicationInfo.uid;
             }
-        };
-        smoothScroller.setTargetPosition(tempPosition);
-        rv.getLayoutManager().startSmoothScroll(smoothScroller);
+        } catch (Exception e) {
+            return -1;
+        }
+        return -1;
+    }
+
+
+    public static String getHMS(long timetemp) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timetemp);
+        SimpleDateFormat fmat = new SimpleDateFormat("HH:mm:ss");
+        String time = fmat.format(calendar.getTime());
+        return time;
+    }
+
+
+    public static String getNYRHMS(long timetemp) {
+        Calendar calendar = Calendar.getInstance();
+        calendar.setTimeInMillis(timetemp);
+        SimpleDateFormat fmat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+        String time = fmat.format(calendar.getTime());
+        return time;
     }
 
 
@@ -1046,7 +1098,12 @@ public class CommUtils {
      * @throws UnsupportedEncodingException
      */
     public static String NetUrlEncoding(String input, String charset) throws UnsupportedEncodingException {
-        byte[] bytes = input.getBytes(charset);
+        byte[] bytes = new byte[0];
+        try {
+            bytes = input.getBytes(charset);
+        } catch (UnsupportedEncodingException e) {
+            e.printStackTrace();
+        }
         StringBuilder sb = new StringBuilder(bytes.length);
         for (int i = 0; i < bytes.length; ++i) {
             int cp = bytes[i] < 0 ? bytes[i] + 256 : bytes[i];
@@ -1065,36 +1122,108 @@ public class CommUtils {
         return sb.toString();
     }
 
-    /**
-     * 取出网络请求url的后缀
-     */
-    public static String getUrlSuffix(String url) {
-        String tempsuffix = null;
-        if (url.endsWith(".html")) {
-            tempsuffix = ".html";
-        } else if (url.endsWith(".jpg")) {
-            tempsuffix = ".jpg";
-        } else if (url.endsWith(".png")) {
-            tempsuffix = ".png";
-        } else if (url.endsWith(".pdf")) {
-            tempsuffix = ".pdf";
-        } else if (url.endsWith(".txt")) {
-            tempsuffix = ".txt";
-        } else if (url.endsWith(".doc")) {
-            tempsuffix = ".doc";
-        } else if (url.endsWith(".docx")) {
-            tempsuffix = ".docx";
-        } else if (url.endsWith(".xls")) {
-            tempsuffix = ".xls";
-        } else if (url.endsWith(".xlsx")) {
-            tempsuffix = ".xlsx";
-        } else if (url.endsWith(".ppt")) {
-            tempsuffix = ".ppt";
-        } else if (url.endsWith(".pptx")) {
-            tempsuffix = "pptx";
-        }
 
-        return tempsuffix;
+    /**
+     * 返回日时分秒
+     *
+     * @param second
+     * @return
+     */
+    public static String secondToTime(long second) {
+        long days = second / 86400;//转换天数
+        second = second % 86400;//剩余秒数
+        long hours = second / 3600;//转换小时数
+        second = second % 3600;//剩余秒数
+        long minutes = second / 60;//转换分钟
+        second = second % 60;//剩余秒数
+//        if (0 < days){
+//            return days + "天，"+hours+"小时，"+minutes+"分，"+second+"秒";
+//        }else {
+//            return hours+"小时，"+minutes+"分，"+second+"秒";
+//        }
+        if (days * 24 + hours == 0 && minutes > 0) return minutes + ":" + second;
+        if (days * 24 + hours > 0) return (days * 24 + hours) + ":" + minutes + ":" + second;
+        return second + "";
     }
 
+    public static void HideSoftKeyBoard(View v) {
+        InputMethodManager imm = ((InputMethodManager) v.getContext().getSystemService(Context.INPUT_METHOD_SERVICE));
+        if (imm.isActive()) {
+            imm.hideSoftInputFromWindow(v.getApplicationWindowToken(), InputMethodManager.HIDE_NOT_ALWAYS);
+        }
+    }
+
+    /**
+     * 显示Toast
+     *
+     * @param ctx
+     * @param string
+     */
+    public static void showMutiWindowToast(Context ctx, String string) {
+        if (ctx == null) return;
+        if (TextUtils.isEmpty(string)) return;
+        LayoutInflater inflater = LayoutInflater.from(ctx);
+        View view = inflater.inflate(R.layout.activity_multi_window, null);
+        TextView msgTxt = view.findViewById(R.id.msgTxt);
+        msgTxt.setText(string);
+        Toast toast = new Toast(ctx);
+        toast.setGravity(Gravity.CENTER, 0, -100);
+        toast.setDuration(Toast.LENGTH_SHORT);
+        toast.setView(view);
+        toast.show();
+    }
+
+    //获取近半年
+    public static ArrayList<String> getCurHalfYear() {
+        ArrayList<String> halfMonth = new ArrayList<>();
+        SimpleDateFormat format = new SimpleDateFormat("yyyy-MM", Locale.CHINA);
+        String ym = format.format(new Date());
+        halfMonth.add(getLast12Months(5));
+        halfMonth.add(ym);
+        return halfMonth;
+    }
+
+    private static String getLast12Months(int i) {
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM", Locale.CHINA);
+        Calendar c = Calendar.getInstance();
+        c.setTime(new Date());
+        c.add(Calendar.MONTH, -i);
+        Date m = c.getTime();
+        return sdf.format(m);
+    }
+
+    public static int getMonthDiff(Calendar c1, Calendar c2) {
+        int year1 = c1.get(Calendar.YEAR);//获取年
+        int year2 = c2.get(Calendar.YEAR);
+        int month1 = c1.get(Calendar.MONTH);//月份
+        int month2 = c2.get(Calendar.MONTH);
+        int day1 = c1.get(Calendar.DAY_OF_MONTH);//日
+        int day2 = c2.get(Calendar.DAY_OF_MONTH);
+        // 获取年的差值
+        int yearInterval = year1 - year2;
+        // 如果 d1的 月-日 小于 d2的 月-日 那么 yearInterval-- 这样就得到了相差的年数
+        if (month1 < month2 || month1 == month2 && day1 < day2)
+            yearInterval--;
+        // 获取月数差值
+        int monthInterval = (month1 + 12) - month2;
+        if (day1 < day2)
+            monthInterval--;
+        monthInterval %= 12;
+        int monthsDiff = Math.abs(yearInterval * 12 + monthInterval);
+        return monthsDiff;
+    }
+
+    public static SpannableString matcherSearchTitle(int color, String text, String keyword) {
+        SpannableString s = new SpannableString(text);
+        if (TextUtils.isEmpty(text) && TextUtils.isEmpty(keyword) && text.contains(keyword)) {
+            Pattern p = Pattern.compile(keyword);
+            Matcher m = p.matcher(s);
+            while (m.find()) {
+                int start = m.start();
+                int end = m.end();
+                s.setSpan(new ForegroundColorSpan(color), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+            }
+        }
+        return s;
+    }
 }
