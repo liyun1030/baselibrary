@@ -46,16 +46,6 @@ public class BasePresenter {
         UserLoginReModel userLoginReModel=new UserLoginReModel();
         userLoginReModel.setAccount("19000000001");
         userLoginReModel.setPassword("000001");
-//        Disposable disposable = model.login(userLoginReModel)
-//                .compose(ResponseTransformer.handleResult())
-//                .compose(schedulerProvider.applySchedulers())
-//                .subscribe(carBeans -> {
-//                    // 处理数据 直接获取到List<JavaBean> carBeans
-//                    view.getDataSuccess();
-//                }, throwable -> {
-//                    // 处理异常
-//                    view.getDataFail();
-//                });
         Disposable disposable = model.login(userLoginReModel)
                 .compose(ResponseTransformer.handleResult())
                 .compose(schedulerProvider.applySchedulers())
@@ -67,6 +57,16 @@ public class BasePresenter {
                     view.getDataFail((ApiException)throwable);
                 });
         mDisposable.add(disposable);
+//        Disposable disposable = model.login(userLoginReModel)
+//                .compose(ResponseTransformer.handleResult())
+//                .compose(schedulerProvider.applySchedulers())
+//                .subscribe(carBeans -> {
+//                    // 处理数据 直接获取到List<JavaBean> carBeans
+//                    view.getDataSuccess();
+//                }, throwable -> {
+//                    // 处理异常
+//                    view.getDataFail();
+//                });
     }
 
 }

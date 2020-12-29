@@ -48,6 +48,9 @@ android {
             assets.srcDirs = ['src/main/assets', 'src/main/assets/']
         }
     }
+    dataBinding{
+        enabled = true
+    }
     def isBuildSo = false
     if (isBuildSo) { // 构建生成 so 文件
         sourceSets {
