@@ -202,7 +202,8 @@ dependencies {
     api develop.koin.koin_android
     api develop.koin.koin_androidx_scope
     api develop.koin.koin_androidx_viewmodel
-// 底部菜单
+    api develop.anko
+    // 底部菜单
     api(develop.flyco_tablayout) {
         exclude group: 'com.android.support', module: 'support-v4'
     }
